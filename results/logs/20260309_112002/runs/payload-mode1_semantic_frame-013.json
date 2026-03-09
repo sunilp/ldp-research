@@ -1,0 +1,55 @@
+{
+  "task_id": "payload-mode1_semantic_frame-013",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen-coder (qwen2.5-coder:7b). Capabilities: code, code-review, debugging, analysis. Respond to the task thoroughly.",
+      "prompt": "{\"task_type\": \"context_transfer\", \"instruction\": \"You have been analyzing a software system with the following architecture: 3 microservices (auth, billing, notifications) connected via message queue. The billing service has a memory leak that occurs...\", \"payload_mode\": \"semantic_frame\", \"expected_output_format\": \"structured_json\"}",
+      "response": "```json\n{\n  \"task_type\": \"context_transfer\",\n  \"instruction\": \"You have been analyzing a software system with the following architecture: 3 microservices (auth, billing, notifications) connected via message queue. The billing service has a memory leak that occurs...\",\n  \"payload_mode\": \"semantic_frame\",\n  \"expected_output_format\": \"structured_json\",\n  \"context\": {\n    \"architecture\": {\n      \"services\": [\"auth\", \"billing\", \"notifications\"],\n      \"communication\": \"message_queue\"\n    },\n    \"issue\": {\n      \"service\": \"billing\",\n      \"problem\": \"memory_leak\"\n    }\n  }\n}\n```",
+      "input_tokens": 118,
+      "output_tokens": 136,
+      "latency_ms": 2870.650332974037,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nYou have been analyzing a software system with the following architecture: 3 microservices (auth, billing, notifications) connected via message queue. The billing service has a memory leak that occurs after processing >10K events. Transfer this context to a new delegate who must diagnose the root cause.\n\n## Response to Evaluate\n```json\n{\n  \"task_type\": \"context_transfer\",\n  \"instruction\": \"You have been analyzing a software system with the following architecture: 3 microservices (auth, billing, notifications) connected via message queue. The billing service has a memory leak that occurs...\",\n  \"payload_mode\": \"semantic_frame\",\n  \"expected_output_format\": \"structured_json\",\n  \"context\": {\n    \"architecture\": {\n      \"services\": [\"auth\", \"billing\", \"notifications\"],\n      \"communication\": \"message_queue\"\n    },\n    \"issue\": {\n      \"service\": \"billing\",\n      \"problem\": \"memory_leak\"\n    }\n  }\n}\n```\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 6,\n  \"correctness\": 7,\n  \"completeness\": 5,\n  \"reasoning\": \"The JSON",
+      "input_tokens": 351,
+      "output_tokens": 39,
+      "latency_ms": 6023.321791988565,
+      "cost_usd": 7.604999999999999e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 6,
+        "correctness": 7,
+        "completeness": 5,
+        "overall": 6.1,
+        "reasoning": "The JSON"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "payload-mode1_semantic_frame-013",
+      "task_type": "context_transfer",
+      "payload_mode": "semantic_frame",
+      "token_count": 254,
+      "wall_clock_ms": 2870.650332974037,
+      "information_preserved": 5,
+      "output_quality": 6.1,
+      "cost_usd": 0.0,
+      "input_tokens": 118,
+      "output_tokens": 136
+    }
+  ]
+}

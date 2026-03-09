@@ -1,0 +1,14 @@
+{
+  "task_id": "fallback-a2a_no_fallback-009",
+  "events": [
+    {
+      "event": "task_result",
+      "task_id": "fallback-009",
+      "failure_type": "codec_incompatibility",
+      "completion_rate": 0.0,
+      "quality_degradation": 1.0,
+      "recovery_latency_ms": 0.0,
+      "quality_score": 0.0
+    }
+  ]
+}

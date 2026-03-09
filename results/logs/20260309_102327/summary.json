@@ -1,0 +1,9 @@
+{
+  "run_id": "20260309_102327",
+  "total_events": 450,
+  "total_llm_calls": 180,
+  "total_tokens": 165964,
+  "total_cost_usd": 0.011459,
+  "elapsed_seconds": 3324.4,
+  "log_dir": "results/logs/20260309_102327"
+}

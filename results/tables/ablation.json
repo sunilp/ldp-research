@@ -1,0 +1,394 @@
+[
+  {
+    "experiment": "ablation",
+    "condition": "a2a",
+    "n_runs": 30,
+    "metrics": {
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 7.2533,
+        "median": 9.05,
+        "std": 3.5181,
+        "ci_95": [
+          5.9944,
+          8.5123
+        ],
+        "min": 1.0,
+        "max": 10.0,
+        "n": 30
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 30
+      },
+      "latency_ms": {
+        "name": "latency_ms",
+        "mean": 78833.1241,
+        "median": 71014.1654,
+        "std": 47855.4539,
+        "ci_95": [
+          61708.2699,
+          95957.9784
+        ],
+        "min": 6388.4332,
+        "max": 157016.2671,
+        "n": 30
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 1276.0667,
+        "median": 1313.5,
+        "std": 822.3809,
+        "ci_95": [
+          981.7815,
+          1570.3519
+        ],
+        "min": 70.0,
+        "max": 2112.0,
+        "n": 30
+      },
+      "cost_efficiency": {
+        "name": "cost_efficiency",
+        "mean": 72533.3333,
+        "median": 90500.0,
+        "std": 35181.0424,
+        "ci_95": [
+          59943.959,
+          85122.7077
+        ],
+        "min": 10000.0,
+        "max": 100000.0,
+        "n": 30
+      },
+      "latency_efficiency": {
+        "name": "latency_efficiency",
+        "mean": 0.2162,
+        "median": 0.1157,
+        "std": 0.3092,
+        "ci_95": [
+          0.1056,
+          0.3269
+        ],
+        "min": 0.0076,
+        "max": 1.5184,
+        "n": 30
+      },
+      "routing_latency_ms": {
+        "name": "routing_latency_ms",
+        "mean": 0.0067,
+        "median": 0.0053,
+        "std": 0.0029,
+        "ci_95": [
+          0.0057,
+          0.0078
+        ],
+        "min": 0.0047,
+        "max": 0.0172,
+        "n": 30
+      }
+    }
+  },
+  {
+    "experiment": "ablation",
+    "condition": "ldp_generic_prompt",
+    "n_runs": 30,
+    "metrics": {
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 6.96,
+        "median": 8.65,
+        "std": 3.5472,
+        "ci_95": [
+          5.6907,
+          8.2293
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 30
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 30
+      },
+      "latency_ms": {
+        "name": "latency_ms",
+        "mean": 69103.9267,
+        "median": 89750.1201,
+        "std": 51475.3708,
+        "ci_95": [
+          50683.7019,
+          87524.1516
+        ],
+        "min": 1061.2189,
+        "max": 156446.2064,
+        "n": 30
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 1342.1333,
+        "median": 2086.0,
+        "std": 931.99,
+        "ci_95": [
+          1008.625,
+          1675.6417
+        ],
+        "min": 93.0,
+        "max": 2112.0,
+        "n": 30
+      },
+      "cost_efficiency": {
+        "name": "cost_efficiency",
+        "mean": 69600.0,
+        "median": 86500.0,
+        "std": 35471.7955,
+        "ci_95": [
+          56906.581,
+          82293.419
+        ],
+        "min": 0.0,
+        "max": 100000.0,
+        "n": 30
+      },
+      "latency_efficiency": {
+        "name": "latency_efficiency",
+        "mean": 1.9558,
+        "median": 0.0979,
+        "std": 2.7987,
+        "ci_95": [
+          0.9543,
+          2.9573
+        ],
+        "min": 0.0,
+        "max": 7.7061,
+        "n": 30
+      },
+      "routing_latency_ms": {
+        "name": "routing_latency_ms",
+        "mean": 0.0107,
+        "median": 0.0095,
+        "std": 0.0037,
+        "ci_95": [
+          0.0094,
+          0.0121
+        ],
+        "min": 0.0067,
+        "max": 0.0208,
+        "n": 30
+      }
+    }
+  },
+  {
+    "experiment": "ablation",
+    "condition": "a2a_ldp_prompt",
+    "n_runs": 30,
+    "metrics": {
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 7.3733,
+        "median": 9.1,
+        "std": 3.2573,
+        "ci_95": [
+          6.2077,
+          8.539
+        ],
+        "min": 1.0,
+        "max": 10.0,
+        "n": 30
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 30
+      },
+      "latency_ms": {
+        "name": "latency_ms",
+        "mean": 74202.1584,
+        "median": 72421.6194,
+        "std": 40379.4177,
+        "ci_95": [
+          59752.5693,
+          88651.7474
+        ],
+        "min": 1219.4548,
+        "max": 150930.1195,
+        "n": 30
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 1328.5,
+        "median": 1462.5,
+        "std": 819.2729,
+        "ci_95": [
+          1035.327,
+          1621.673
+        ],
+        "min": 95.0,
+        "max": 2135.0,
+        "n": 30
+      },
+      "cost_efficiency": {
+        "name": "cost_efficiency",
+        "mean": 73733.3333,
+        "median": 91000.0,
+        "std": 32573.4537,
+        "ci_95": [
+          62077.0726,
+          85389.594
+        ],
+        "min": 10000.0,
+        "max": 100000.0,
+        "n": 30
+      },
+      "latency_efficiency": {
+        "name": "latency_efficiency",
+        "mean": 0.4521,
+        "median": 0.0902,
+        "std": 1.3058,
+        "ci_95": [
+          -0.0152,
+          0.9193
+        ],
+        "min": 0.0066,
+        "max": 6.9703,
+        "n": 30
+      },
+      "routing_latency_ms": {
+        "name": "routing_latency_ms",
+        "mean": 0.006,
+        "median": 0.0055,
+        "std": 0.0015,
+        "ci_95": [
+          0.0055,
+          0.0066
+        ],
+        "min": 0.0042,
+        "max": 0.0098,
+        "n": 30
+      }
+    }
+  },
+  {
+    "experiment": "ablation",
+    "condition": "ldp",
+    "n_runs": 30,
+    "metrics": {
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 6.8633,
+        "median": 9.0,
+        "std": 3.8711,
+        "ci_95": [
+          5.4781,
+          8.2486
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 30
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 30
+      },
+      "latency_ms": {
+        "name": "latency_ms",
+        "mean": 67178.6876,
+        "median": 87655.9135,
+        "std": 48039.4696,
+        "ci_95": [
+          49987.9842,
+          84369.391
+        ],
+        "min": 553.5255,
+        "max": 152496.6914,
+        "n": 30
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 1440.6667,
+        "median": 2113.5,
+        "std": 936.606,
+        "ci_95": [
+          1105.5065,
+          1775.8268
+        ],
+        "min": 97.0,
+        "max": 2135.0,
+        "n": 30
+      },
+      "cost_efficiency": {
+        "name": "cost_efficiency",
+        "mean": 68633.3333,
+        "median": 90000.0,
+        "std": 38710.6716,
+        "ci_95": [
+          54780.8974,
+          82485.7692
+        ],
+        "min": 0.0,
+        "max": 100000.0,
+        "n": 30
+      },
+      "latency_efficiency": {
+        "name": "latency_efficiency",
+        "mean": 2.4198,
+        "median": 0.0934,
+        "std": 4.3252,
+        "ci_95": [
+          0.872,
+          3.9675
+        ],
+        "min": 0.0,
+        "max": 17.524,
+        "n": 30
+      },
+      "routing_latency_ms": {
+        "name": "routing_latency_ms",
+        "mean": 0.01,
+        "median": 0.0096,
+        "std": 0.0039,
+        "ci_95": [
+          0.0087,
+          0.0114
+        ],
+        "min": 0.0067,
+        "max": 0.0282,
+        "n": 30
+      }
+    }
+  }
+]

@@ -1,0 +1,317 @@
+{
+  "task_id": "routing-easy-005",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "response": "Machine learning is a statistical approach to AI that enables systems to improve their performance on a specific task through experience and data.",
+      "input_tokens": 45,
+      "output_tokens": 25,
+      "latency_ms": 12509.331791981822,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "task_difficulty": "easy",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "A2A skill match: first delegate with matching capability",
+      "routing_latency_ms": 0.006875023245811462
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nSummarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'\n\n## Response to Evaluate\nMachine learning is a statistical approach to AI that enables systems to improve their performance on a specific task through experience and data.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 10,\n  \"completeness\": 9,\n  \"reasoning\": \"The response accurately summarizes the core information of the original sentence, correctly identifying machine learning as a statistical approach within AI. It also adds highly relevant and accurate definitional context about ML's purpose (improving performance through experience and data), enhancing the summary without introducing errors or exceeding the one-sentence limit.\"\n}\n```",
+      "input_tokens": 176,
+      "output_tokens": 103,
+      "latency_ms": 4465.7381669967435,
+      "cost_usd": 8.819999999999999e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 10,
+        "completeness": 9,
+        "overall": 9.399999999999999,
+        "reasoning": "The response accurately summarizes the core information of the original sentence, correctly identifying machine learning as a statistical approach within AI. It also adds highly relevant and accurate definitional context about ML's purpose (improving performance through experience and data), enhancing the summary without introducing errors or exceeding the one-sentence limit."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-005",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "generic",
+      "quality_score": 9.399999999999999,
+      "cost_usd": 0.0,
+      "latency_ms": 12509.331791981822,
+      "total_tokens": 70,
+      "cost_efficiency": 93999.99999999999,
+      "latency_efficiency": 0.7514390181916168,
+      "routing_latency_ms": 0.006875023245811462
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "llama3.2:3b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "response": "Machine learning is a subset of artificial intelligence (AI) that uses statistical methods to enable machines to learn from data, make predictions, and improve their performance without being explicitly programmed.",
+      "input_tokens": 57,
+      "output_tokens": 36,
+      "latency_ms": 1065.965416986728,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "task_difficulty": "easy",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-llama-3b",
+      "reason": "Ablation[ldp_generic_prompt]: LDP metadata routing, generic prompt. quality=0.55, profile=fast-practical",
+      "routing_latency_ms": 0.008167000487446785
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nSummarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'\n\n## Response to Evaluate\nMachine learning is a subset of artificial intelligence (AI) that uses statistical methods to enable machines to learn from data, make predictions, and improve their performance without being explicitly programmed.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 5,\n  \"correctness\": 9,\n  \"completeness\": 4,\n  \"reasoning\": \"The response is well",
+      "input_tokens": 187,
+      "output_tokens": 41,
+      "latency_ms": 6265.777124994202,
+      "cost_usd": 5.265e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 5,
+        "correctness": 9,
+        "completeness": 4,
+        "overall": 6.3,
+        "reasoning": "The response is well"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-005",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-llama-3b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "generic",
+      "quality_score": 6.3,
+      "cost_usd": 0.0,
+      "latency_ms": 1065.965416986728,
+      "total_tokens": 93,
+      "cost_efficiency": 62999.99999999999,
+      "latency_efficiency": 5.9101354505560275,
+      "routing_latency_ms": 0.008167000487446785
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen-coder (qwen2.5-coder:7b). Capabilities: code, code-review, debugging, analysis. Respond to the task thoroughly.",
+      "prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "response": "Machine learning is a subset of artificial intelligence that utilizes statistical methods to enable computers to learn and improve from experience automatically.",
+      "input_tokens": 71,
+      "output_tokens": 24,
+      "latency_ms": 1219.45483298623,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "task_difficulty": "easy",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "Ablation[a2a_ldp_prompt]: A2A skill-match routing, LDP prompt",
+      "routing_latency_ms": 0.005582987796515226
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nSummarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'\n\n## Response to Evaluate\nMachine learning is a subset of artificial intelligence that utilizes statistical methods to enable computers to learn and improve from experience automatically.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 10,\n  \"completeness\": 6,\n  \"reasoning\": \"The response",
+      "input_tokens": 175,
+      "output_tokens": 40,
+      "latency_ms": 5750.333458010573,
+      "cost_usd": 5.025e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 10,
+        "completeness": 6,
+        "overall": 8.5,
+        "reasoning": "The response"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-005",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "identity",
+      "quality_score": 8.5,
+      "cost_usd": 0.0,
+      "latency_ms": 1219.45483298623,
+      "total_tokens": 95,
+      "cost_efficiency": 85000.0,
+      "latency_efficiency": 6.970327862972176,
+      "routing_latency_ms": 0.005582987796515226
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "llama3.2:3b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-llama-3b (llama3.2:3b). Capabilities: classification, extraction, simple-reasoning. Respond to the task thoroughly.",
+      "prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "response": "Machine learning is a subset of artificial intelligence that employs statistical methods to enable computers to learn from data and improve their performance without being explicitly programmed.",
+      "input_tokens": 83,
+      "output_tokens": 29,
+      "latency_ms": 872.8815000213217,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Summarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'",
+      "task_difficulty": "easy",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-llama-3b",
+      "reason": "LDP metadata routing: quality=0.55, profile=fast-practical",
+      "routing_latency_ms": 0.014250021195039153
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nSummarize in one sentence: 'Machine learning is a subset of AI that uses statistical methods.'\n\n## Response to Evaluate\nMachine learning is a subset of artificial intelligence that employs statistical methods to enable computers to learn from data and improve their performance without being explicitly programmed.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 10,\n  \"completeness\": 6,\n  \"reasoning\": \"The response",
+      "input_tokens": 180,
+      "output_tokens": 40,
+      "latency_ms": 6324.509124999167,
+      "cost_usd": 5.1e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 10,
+        "completeness": 6,
+        "overall": 8.5,
+        "reasoning": "The response"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-005",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-llama-3b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "identity",
+      "quality_score": 8.5,
+      "cost_usd": 0.0,
+      "latency_ms": 872.8815000213217,
+      "total_tokens": 112,
+      "cost_efficiency": 85000.0,
+      "latency_efficiency": 9.737862470212018,
+      "routing_latency_ms": 0.014250021195039153
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Routing quality by task difficulty (RQ1). LDP routes easy tasks to a lightweight delegate (llama-3b, 1s latency) while maintaining quality. A2A always selects the strongest model but scores lowest on hard tasks due to its generic system prompt.}
+\label{tab:routing-difficulty}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{Easy} & \multicolumn{2}{c}{Medium} & \multicolumn{2}{c}{Hard} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+Condition & Quality & Latency & Quality & Latency & Quality & Latency \\
+\midrule
+LDP & 9.4 & 2.9s & 7.7 & 128.2s & 3.3 & 125.8s \\
+A2A & 9.6 & 34.8s & 8.6 & 91.1s & 4.1 & 76.3s \\
+RANDOM & 9.1 & 27.7s & 8.0 & 39.0s & 3.7 & 59.8s \\
+\bottomrule
+\end{tabular}
+\end{table}

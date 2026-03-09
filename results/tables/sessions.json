@@ -1,0 +1,590 @@
+[
+  {
+    "experiment": "sessions",
+    "condition": "ldp_session_rounds3",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 3.0,
+        "median": 3.0,
+        "std": 0.0,
+        "ci_95": [
+          3.0,
+          3.0
+        ],
+        "min": 3.0,
+        "max": 3.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 3860.2,
+        "median": 2561.5,
+        "std": 2036.9423,
+        "ci_95": [
+          2571.9246,
+          5148.4754
+        ],
+        "min": 1910.0,
+        "max": 6363.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 60.0,
+        "median": 0.0,
+        "std": 96.6092,
+        "ci_95": [
+          -1.101,
+          121.101
+        ],
+        "min": 0.0,
+        "max": 200.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 4.2,
+        "median": 3.0,
+        "std": 1.9322,
+        "ci_95": [
+          2.978,
+          5.422
+        ],
+        "min": 3.0,
+        "max": 7.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 1.2,
+        "median": 0.0,
+        "std": 1.9322,
+        "ci_95": [
+          -0.022,
+          2.422
+        ],
+        "min": 0.0,
+        "max": 4.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 126066.3307,
+        "median": 81676.5614,
+        "std": 94883.5382,
+        "ci_95": [
+          66056.712,
+          186075.9493
+        ],
+        "min": 29390.8109,
+        "max": 254782.5464,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  },
+  {
+    "experiment": "sessions",
+    "condition": "ldp_session_rounds5",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 5.0,
+        "median": 5.0,
+        "std": 0.0,
+        "ci_95": [
+          5.0,
+          5.0
+        ],
+        "min": 5.0,
+        "max": 5.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 6378.8,
+        "median": 4491.5,
+        "std": 3177.7827,
+        "ci_95": [
+          4368.9937,
+          8388.6063
+        ],
+        "min": 3368.0,
+        "max": 10197.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 5.0,
+        "median": 5.0,
+        "std": 0.0,
+        "ci_95": [
+          5.0,
+          5.0
+        ],
+        "min": 5.0,
+        "max": 5.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 245630.6758,
+        "median": 142556.3686,
+        "std": 206747.2574,
+        "ci_95": [
+          114872.2291,
+          376389.1225
+        ],
+        "min": 47553.6885,
+        "max": 678932.6719,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  },
+  {
+    "experiment": "sessions",
+    "condition": "ldp_session_rounds10",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 10.0,
+        "median": 10.0,
+        "std": 0.0,
+        "ci_95": [
+          10.0,
+          10.0
+        ],
+        "min": 10.0,
+        "max": 10.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 12989.8,
+        "median": 9157.0,
+        "std": 6422.6655,
+        "ci_95": [
+          8927.7497,
+          17051.8503
+        ],
+        "min": 6799.0,
+        "max": 20538.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 10.0,
+        "median": 10.0,
+        "std": 0.0,
+        "ci_95": [
+          10.0,
+          10.0
+        ],
+        "min": 10.0,
+        "max": 10.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 563420.0802,
+        "median": 372155.1864,
+        "std": 419659.0094,
+        "ci_95": [
+          298004.4181,
+          828835.7422
+        ],
+        "min": 143514.2799,
+        "max": 1304138.6714,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  },
+  {
+    "experiment": "sessions",
+    "condition": "a2a_stateless_rounds3",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 3.0,
+        "median": 3.0,
+        "std": 0.0,
+        "ci_95": [
+          3.0,
+          3.0
+        ],
+        "min": 3.0,
+        "max": 3.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 3846.8,
+        "median": 2325.0,
+        "std": 2143.5851,
+        "ci_95": [
+          2491.0777,
+          5202.5223
+        ],
+        "min": 1943.0,
+        "max": 6512.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 398.8,
+        "median": 398.0,
+        "std": 25.0191,
+        "ci_95": [
+          382.9765,
+          414.6235
+        ],
+        "min": 356.0,
+        "max": 434.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 6.0,
+        "median": 6.0,
+        "std": 0.0,
+        "ci_95": [
+          6.0,
+          6.0
+        ],
+        "min": 6.0,
+        "max": 6.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 3.0,
+        "median": 3.0,
+        "std": 0.0,
+        "ci_95": [
+          3.0,
+          3.0
+        ],
+        "min": 3.0,
+        "max": 3.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 163957.249,
+        "median": 91191.1537,
+        "std": 147755.1682,
+        "ci_95": [
+          70508.6754,
+          257405.8225
+        ],
+        "min": 40969.5351,
+        "max": 441032.3857,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  },
+  {
+    "experiment": "sessions",
+    "condition": "a2a_stateless_rounds5",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 5.0,
+        "median": 5.0,
+        "std": 0.0,
+        "ci_95": [
+          5.0,
+          5.0
+        ],
+        "min": 5.0,
+        "max": 5.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 6797.5,
+        "median": 4507.5,
+        "std": 3343.461,
+        "ci_95": [
+          4682.9096,
+          8912.0904
+        ],
+        "min": 3909.0,
+        "max": 10958.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 1374.0,
+        "median": 1371.0,
+        "std": 42.6979,
+        "ci_95": [
+          1346.9955,
+          1401.0045
+        ],
+        "min": 1276.0,
+        "max": 1420.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 10.0,
+        "median": 10.0,
+        "std": 0.0,
+        "ci_95": [
+          10.0,
+          10.0
+        ],
+        "min": 10.0,
+        "max": 10.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 5.0,
+        "median": 5.0,
+        "std": 0.0,
+        "ci_95": [
+          5.0,
+          5.0
+        ],
+        "min": 5.0,
+        "max": 5.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 257966.3541,
+        "median": 134937.0644,
+        "std": 207094.8156,
+        "ci_95": [
+          126988.0923,
+          388944.6159
+        ],
+        "min": 71821.9255,
+        "max": 599069.0264,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  },
+  {
+    "experiment": "sessions",
+    "condition": "a2a_stateless_rounds10",
+    "n_runs": 10,
+    "metrics": {
+      "n_rounds": {
+        "name": "n_rounds",
+        "mean": 10.0,
+        "median": 10.0,
+        "std": 0.0,
+        "ci_95": [
+          10.0,
+          10.0
+        ],
+        "min": 10.0,
+        "max": 10.0,
+        "n": 10
+      },
+      "total_tokens": {
+        "name": "total_tokens",
+        "mean": 16009.5,
+        "median": 11402.0,
+        "std": 6560.9103,
+        "ci_95": [
+          11860.016,
+          20158.984
+        ],
+        "min": 10043.0,
+        "max": 24267.0,
+        "n": 10
+      },
+      "overhead_tokens": {
+        "name": "overhead_tokens",
+        "mean": 6274.6,
+        "median": 6307.0,
+        "std": 341.9253,
+        "ci_95": [
+          6058.3474,
+          6490.8526
+        ],
+        "min": 5820.0,
+        "max": 6672.0,
+        "n": 10
+      },
+      "total_messages": {
+        "name": "total_messages",
+        "mean": 20.0,
+        "median": 20.0,
+        "std": 0.0,
+        "ci_95": [
+          20.0,
+          20.0
+        ],
+        "min": 20.0,
+        "max": 20.0,
+        "n": 10
+      },
+      "overhead_messages": {
+        "name": "overhead_messages",
+        "mean": 10.0,
+        "median": 10.0,
+        "std": 0.0,
+        "ci_95": [
+          10.0,
+          10.0
+        ],
+        "min": 10.0,
+        "max": 10.0,
+        "n": 10
+      },
+      "end_to_end_ms": {
+        "name": "end_to_end_ms",
+        "mean": 512969.3367,
+        "median": 275449.4969,
+        "std": 403831.2507,
+        "ci_95": [
+          257564.0282,
+          768374.6452
+        ],
+        "min": 146578.8791,
+        "max": 1153234.1307,
+        "n": 10
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 10
+      }
+    }
+  }
+]

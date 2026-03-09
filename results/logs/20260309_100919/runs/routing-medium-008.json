@@ -1,0 +1,81 @@
+{
+  "task_id": "routing-medium-008",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen3-8b (qwen3:8b). Capabilities: reasoning, code, analysis, math. Respond to the task thoroughly.",
+      "prompt": "Explain the mathematical intuition behind attention mechanisms in transformers.",
+      "response": "The attention mechanism in transformers is a mathematical framework that enables models to dynamically weigh the importance of different parts of an input sequence when processing each element. This mechanism is foundational to the transformer architecture's ability to handle long-range dependencies and parallelize computation. Below is a breakdown of its mathematical intuition:\n\n---\n\n### **1. Core Idea: Weighted Sum of Values**\nThe attention mechanism computes a **weighted sum** of value vectors, where the weights are determined by the **similarity** between the query and key vectors. This allows the model to focus on the most relevant parts of the input for each position.\n\n**Mathematical Formulation:**\n$$\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right) V\n$$\n- **$ Q $, $ K $, $ V $**: Query, Key, Value matrices derived from the input sequence.\n- **$ d_k $**: Dimension of the key vectors (scaling factor for numerical stability).\n- **$ \\text{softmax} $**: Normalizes the attention scores into a probability distribution.\n\n---\n\n### **2. Key Components and Their Roles**\n#### **a. Query (Q) and Key (K) Vectors**\n- **Query**: Represents the current position's context (e.g., \"the verb in the sentence\").\n- **Key**: Encodes the information of other positions in the sequence.\n- **Dot Product $ QK^T $**: Measures similarity between the current position and all others. A higher dot product indicates stronger relevance.\n\n#### **b. Scaling Factor $ \\frac{1}{\\sqrt{d_k}} $**\n- Prevents the dot product from becoming too large, which could cause numerical instability (e.g., saturation of the softmax function).\n- Ensures gradients remain manageable during training.\n\n#### **c. Softmax Normalization**\n- Converts raw attention scores into a probability distribution over the sequence.\n- Ensures the weights sum to 1, making them interpretable as \"importance\" scores.\n\n#### **d. Value (V) Vectors**\n- Contain the actual information to be retrieved. The weighted sum of values produces the final output for the current position.\n\n---\n\n### **3. Self-Attention in Transformers**\nIn self-attention, all positions in the sequence attend to each other. This is achieved by:\n1. **Projecting the input** into three separate matrices $ Q $, $ K $, and $ V $ using learned weights.\n2. **Computing attention scores** for every pair of positions.\n3. **Aggregating values** using the attention weights to form a context-aware representation.\n\n**Example:**  \nFor a sentence like \"The cat sat on the mat,\" the word \"cat\" might attend more to \"sat\" and \"mat\" when predicting the verb, while \"mat\" might attend to \"cat\" and \"sat\" when predicting the noun.\n\n---\n\n### **4. Multi-Head Attention**\nTo capture diverse relationships, transformers use **multiple attention heads**:\n- Each head computes attention independently using different $ Q $, $ K $, $ V $ projections.\n- The results are concatenated and linearly transformed to form the final output.\n- This allows the model to attend to different subspaces of the input (e.g., syntax, semantics).\n\n**Mathematical Formulation:**\n$$\n\\text{",
+      "input_tokens": 61,
+      "output_tokens": 2048,
+      "latency_ms": 60565.817915980006,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Explain the mathematical intuition behind attention mechanisms in transformers.",
+      "task_difficulty": "medium",
+      "task_domain": "writing",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "LDP metadata routing: quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.02833301550708711
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nExplain the mathematical intuition behind attention mechanisms in transformers.\n\n## Response to Evaluate\nThe attention mechanism in transformers is a mathematical framework that enables models to dynamically weigh the importance of different parts of an input sequence when processing each element. This mechanism is foundational to the transformer architecture's ability to handle long-range dependencies and parallelize computation. Below is a breakdown of its mathematical intuition:\n\n---\n\n### **1. Core Idea: Weighted Sum of Values**\nThe attention mechanism computes a **weighted sum** of value vectors, where the weights are determined by the **similarity** between the query and key vectors. This allows the model to focus on the most relevant parts of the input for each position.\n\n**Mathematical Formulation:**\n$$\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right) V\n$$\n- **$ Q $, $ K $, $ V $**: Query, Key, Value matrices derived from the input sequence.\n- **$ d_k $**: Dimension of the key vectors (scaling factor for numerical stability).\n- **$ \\text{softmax} $**: Normalizes the attention scores into a probability distribution.\n\n---\n\n### **2. Key Components and Their Roles**\n#### **a. Query (Q) and Key (K) Vectors**\n- **Query**: Represents the current position's context (e.g., \"the verb in the sentence\").\n- **Key**: Encodes the information of other positions in the sequence.\n- **Dot Product $ QK^T $**: Measures similarity between the current position and all others. A higher dot product indicates stronger relevance.\n\n#### **b. Scaling Factor $ \\frac{1}{\\sqrt{d_k}} $**\n- Prevents the dot product from becoming too large, which could cause numerical instability (e.g., saturation of the softmax function).\n- Ensures gradients remain manageable during training.\n\n#### **c. Softmax Normalization**\n- Converts raw attention scores into a probability distribution over the sequence.\n- Ensures the weights sum to 1, making them interpretable as \"importance\" scores.\n\n#### **d. Value (V) Vectors**\n- Contain the actual information to be retrieved. The weighted sum of values produces the final output for the current position.\n\n---\n\n### **3. Self-Attention in Transformers**\nIn self-attention, all positions in the sequence attend to each other. This is achieved by:\n1. **Projecting the input** into three separate matrices $ Q $, $ K $, and $ V $ using learned weights.\n2. **Computing attention scores** for every pair of positions.\n3. **Aggregating values** using the attention weights to form a context-aware representation.\n\n**Example:**  \nFor a sentence like \"The cat sat on the mat,\" the word \"cat\" might attend more to \"sat\" and \"mat\" when predicting the verb, while \"mat\" might attend to \"cat\" and \"sat\" when predicting the noun.\n\n---\n\n### **4. Multi-Head Attention**\nTo capture diverse relationships, transformers use **multiple attention heads**:\n- Each head computes attention independently using different $ Q $, $ K $, $ V $ projections.\n- The results are concatenated and linearly transformed to form the final output.\n- This allows the model to attend to different subspaces of the input (e.g., syntax, semantics).\n\n**Mathematical Formulation:**\n$$\n\\text{\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": ",
+      "input_tokens": 862,
+      "output_tokens": 18,
+      "latency_ms": 3426.585666980827,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 5,
+        "correctness": 5,
+        "completeness": 5,
+        "overall": 5.0,
+        "reasoning": "Parse error. Raw: ```json\n{\n  \"quality\": 9,\n  \"correctness\": "
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-008",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen3-8b",
+      "quality_score": 5.0,
+      "cost_usd": 0.0,
+      "latency_ms": 60565.817915980006,
+      "total_tokens": 2109,
+      "cost_efficiency": 50000.0,
+      "latency_efficiency": 0.0825548167604416,
+      "routing_latency_ms": 0.02833301550708711
+    }
+  ]
+}

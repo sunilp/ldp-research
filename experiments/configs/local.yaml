@@ -1,0 +1,256 @@
+# LDP Research — Local Experiment Configuration
+#
+# Uses Ollama (free, local) for delegates + Gemini Flash (cheap) for judge.
+# Total estimated cost: $10-20 for full run, $0 if using local judge.
+#
+# Prerequisites:
+#   ollama pull qwen3:8b          (already installed)
+#   ollama pull qwen2.5-coder:7b  (already installed)
+#   ollama pull llama3.2:3b       (already installed)
+#   ollama pull gemma2:9b         (5GB download — cross-family delegate)
+#   pip install google-genai httpx pyyaml scipy
+
+defaults:
+  # Judge model: Gemini 2.5 Flash (cheap) or local Ollama (free)
+  # Option A: Gemini 2.5 Flash — better quality judging
+  llm_judge_model: "gemini-2.5-flash"
+  llm_judge_provider: "google"
+  # Option B: Local judge ($0 total) — works without API key
+  # llm_judge_model: "qwen3:8b"
+  # llm_judge_provider: "ollama"
+  max_retries: 2
+  timeout_secs: 300  # Local models are slower
+  output_dir: "results"
+  data_dir: "data"
+  # JamJet integration — set to true to run through real runtime
+  # Requires: `jamjet dev` running + LDP adapter registered
+  use_jamjet: false
+  jamjet_url: "http://localhost:7700"
+
+# Delegate pool — all local via Ollama
+# Simulates different quality/cost tiers and model families
+delegates:
+  # ── High quality tier (Qwen family) ──────────────────────
+  - id: "delegate-qwen3-8b"
+    model: "qwen3:8b"
+    provider: "ollama"
+    capabilities: ["reasoning", "code", "analysis", "math"]
+    quality_hint: 0.85
+    cost_hint: "high"
+    latency_hint: "p50:5000ms"
+    reasoning_profile: "deep-analytical"
+
+  # ── Code specialist ──────────────────────────────────────
+  - id: "delegate-qwen-coder"
+    model: "qwen2.5-coder:7b"
+    provider: "ollama"
+    capabilities: ["code", "code-review", "debugging", "analysis"]
+    quality_hint: 0.80
+    cost_hint: "medium"
+    latency_hint: "p50:4000ms"
+    reasoning_profile: "code-specialist"
+
+  # ── Medium quality tier (Llama family) ───────────────────
+  - id: "delegate-llama-3b"
+    model: "llama3.2:3b"
+    provider: "ollama"
+    capabilities: ["classification", "extraction", "simple-reasoning"]
+    quality_hint: 0.55
+    cost_hint: "low"
+    latency_hint: "p50:1000ms"
+    reasoning_profile: "fast-practical"
+
+  # ── Cross-family delegate (Gemma family) ─────────────────
+  # Uncomment after: ollama pull gemma2:9b
+  # - id: "delegate-gemma-9b"
+  #   model: "gemma2:9b"
+  #   provider: "ollama"
+  #   capabilities: ["reasoning", "analysis", "writing"]
+  #   quality_hint: 0.75
+  #   cost_hint: "medium"
+  #   latency_hint: "p50:3000ms"
+  #   reasoning_profile: "balanced"
+
+experiments:
+  # ─── Experiment 1: Routing Quality (RQ1) ──────────────────────────
+  routing:
+    name: "Routing Quality"
+    research_question: "RQ1"
+    description: "Does AI-native identity improve delegation routing quality?"
+    task_count: 30  # Reduced from 100 for local runs
+    conditions:
+      - name: "ldp"
+        protocol: "ldp"
+        routing: "metadata"
+      - name: "a2a"
+        protocol: "a2a"
+        routing: "skill_match"
+      - name: "random"
+        protocol: "a2a"
+        routing: "random"
+    task_distribution:
+      easy: 10
+      medium: 10
+      hard: 10
+    metrics:
+      - "quality_score"
+      - "cost_efficiency"
+      - "latency_efficiency"
+      - "routing_precision"
+    total_runs: 90
+
+  # ─── Ablation: Routing vs Prompting (2x2 Factorial) ────────────────
+  # Isolates routing and prompting contributions of LDP.
+  # Uses same tasks as routing experiment for direct comparison.
+  ablation:
+    name: "Routing vs Prompting Ablation"
+    research_question: "RQ1-ablation"
+    description: >
+      2x2 factorial design crossing routing strategy (A2A skill-match vs LDP
+      metadata-aware) with prompting strategy (generic vs identity-enriched).
+      Isolates whether LDP's advantage comes from routing, prompting, or both.
+    task_count: 30
+    conditions:
+      # Cell (0,0): A2A routing + generic prompt (control — pure A2A)
+      - name: "a2a"
+        routing: "skill_match"
+        prompt: "generic"
+        protocol: "a2a"
+      # Cell (0,1): LDP routing + generic prompt (routing-only ablation)
+      - name: "ldp_generic_prompt"
+        routing: "metadata"
+        prompt: "generic"
+        protocol: "ldp_generic_prompt"
+      # Cell (1,0): A2A routing + LDP prompt (prompting-only ablation)
+      - name: "a2a_ldp_prompt"
+        routing: "skill_match"
+        prompt: "identity"
+        protocol: "a2a_ldp_prompt"
+      # Cell (1,1): LDP routing + LDP prompt (control — full LDP)
+      - name: "ldp"
+        routing: "metadata"
+        prompt: "identity"
+        protocol: "ldp"
+    task_distribution:
+      easy: 10
+      medium: 10
+      hard: 10
+    metrics:
+      - "quality_score"
+      - "cost_efficiency"
+      - "latency_efficiency"
+      - "routing_precision"
+    total_runs: 120
+
+  # ─── Experiment 2: Payload Mode Efficiency (RQ2) ──────────────────
+  payload:
+    name: "Payload Mode Efficiency"
+    research_question: "RQ2"
+    description: "Does payload mode negotiation improve communication efficiency?"
+    task_count: 20
+    conditions:
+      - name: "mode0_text"
+        payload_mode: "text"
+      - name: "mode1_semantic_frame"
+        payload_mode: "semantic_frame"
+      - name: "a2a_json"
+        protocol: "a2a"
+    task_types:
+      - "reasoning_handoff"
+      - "context_transfer"
+      - "verification"
+    metrics:
+      - "token_count"
+      - "wall_clock_ms"
+      - "information_preserved"
+      - "output_quality"
+    total_runs: 60
+
+  # ─── Experiment 3: Provenance Value (RQ3) ─────────────────────────
+  provenance:
+    name: "Provenance Value"
+    research_question: "RQ3"
+    description: "Does structured provenance improve downstream decision quality?"
+    task_count: 15
+    conditions:
+      - name: "with_provenance"
+        provenance: true
+      - name: "without_provenance"
+        provenance: false
+      - name: "noisy_provenance"
+        provenance: true
+        noise: true
+    metrics:
+      - "decision_quality"
+      - "calibration_accuracy"
+      - "error_detection_rate"
+    total_runs: 45
+
+  # ─── Experiment 4: Session Efficiency (RQ4) ───────────────────────
+  sessions:
+    name: "Session Efficiency"
+    research_question: "RQ4"
+    description: "Do governed sessions reduce overhead for multi-round tasks?"
+    task_count: 10
+    conditions:
+      - name: "ldp_session"
+        protocol: "ldp"
+        session: true
+      - name: "a2a_stateless"
+        protocol: "a2a"
+        session: false
+    round_counts: [3, 5, 10]
+    metrics:
+      - "total_messages"
+      - "total_tokens"
+      - "end_to_end_ms"
+      - "context_preserved"
+    total_runs: 60
+
+  # ─── Experiment 5: Security Boundaries (RQ5) ─────────────────────
+  security:
+    name: "Security Boundary Enforcement"
+    research_question: "RQ5"
+    description: "Do trust domains prevent unauthorized cross-boundary delegation?"
+    scenario_count: 50  # Simulated — no LLM cost
+    conditions:
+      - name: "ldp_trust_domains"
+        protocol: "ldp"
+        trust_enforcement: true
+      - name: "a2a_auth"
+        protocol: "a2a"
+        trust_enforcement: false
+    injection_types:
+      - "untrusted_domain_join"
+      - "capability_escalation"
+      - "replay_attack"
+      - "cross_domain_no_auth"
+    metrics:
+      - "detection_rate"
+      - "false_positive_rate"
+      - "attack_surface"
+    total_runs: 100
+
+  # ─── Experiment 6: Fallback Reliability (RQ6) ────────────────────
+  fallback:
+    name: "Fallback Reliability"
+    research_question: "RQ6"
+    description: "Does fallback improve end-to-end reliability?"
+    task_count: 20
+    conditions:
+      - name: "ldp_fallback"
+        protocol: "ldp"
+        fallback: true
+      - name: "a2a_no_fallback"
+        protocol: "a2a"
+        fallback: false
+    failure_types:
+      - "schema_mismatch"
+      - "codec_incompatibility"
+      - "version_mismatch"
+      - "timeout_degradation"
+    metrics:
+      - "completion_rate"
+      - "quality_degradation"
+      - "recovery_latency_ms"
+    total_runs: 160

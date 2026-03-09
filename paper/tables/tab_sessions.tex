@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Session efficiency comparison (RQ4). LDP governed sessions eliminate context re-transmission overhead that grows with conversation length. At 10 rounds, A2A uses 23\% more tokens, with 39\% of its tokens being pure overhead.}
+\label{tab:sessions}
+\begin{tabular}{lcccr}
+\toprule
+Condition & Tokens & Overhead & OH\% & Messages \\
+\midrule
+LDP 3 rounds & 3,860 & 60 & 2\% & 4.2 \\
+A2A 3 rounds & 3,847 & 399 & 10\% & 6.0 \\
+\midrule
+LDP 5 rounds & 6,379 & 0 & 0\% & 5.0 \\
+A2A 5 rounds & 6,798 & 1,374 & 20\% & 10.0 \\
+\midrule
+LDP 10 rounds & 12,990 & 0 & 0\% & 10.0 \\
+A2A 10 rounds & \textbf{16,010} & \textbf{6,275} & \textbf{39\%} & 20.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

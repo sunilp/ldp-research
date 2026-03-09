@@ -1,0 +1,52 @@
+# Rust
+target/
+Cargo.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.eggs/
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+.env.local
+
+# Raw experimental data
+data/raw/
+data/responses/
+
+# JamJet state
+*.sqlite
+*.db
+
+# Results intermediate
+results/intermediate/
+
+# LaTeX build
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.pdf
+
+# Submission zip
+paper/arxiv-submission.zip
+
+# Draft files
+paper/github_readme_draft.md

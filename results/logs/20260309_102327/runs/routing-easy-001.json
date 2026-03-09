@@ -1,0 +1,233 @@
+{
+  "task_id": "routing-easy-001",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "llama3.2:3b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-llama-3b (llama3.2:3b). Capabilities: classification, extraction, simple-reasoning. Respond to the task thoroughly.",
+      "prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "response": "Extracted main entities:\n\n1. **Person**: Tim Cook (Apple CEO)\n2. **Organization**: Apple\n3. **Event**: WWDC (Worldwide Developers Conference)\n4. **Product**: iPhone\n5. **Action**: Announcement",
+      "input_tokens": 81,
+      "output_tokens": 50,
+      "latency_ms": 754.2318750056438,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "task_difficulty": "easy",
+      "task_domain": "math",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-llama-3b",
+      "reason": "LDP metadata routing: quality=0.55, profile=fast-practical",
+      "routing_latency_ms": 0.030583003535866737
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nExtract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'\n\n## Response to Evaluate\nExtracted main entities:\n\n1. **Person**: Tim Cook (Apple CEO)\n2. **Organization**: Apple\n3. **Event**: WWDC (Worldwide Developers Conference)\n4. **Product**: iPhone\n5. **Action**: Announcement\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 8,\n  \"completeness\": 9,\n  \"reasoning\": \"The",
+      "input_tokens": 202,
+      "output_tokens": 38,
+      "latency_ms": 6309.840791975148,
+      "cost_usd": 5.3099999999999996e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 8,
+        "completeness": 9,
+        "overall": 8.6,
+        "reasoning": "The"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-001",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-llama-3b",
+      "quality_score": 8.6,
+      "cost_usd": 0.0,
+      "latency_ms": 754.2318750056438,
+      "total_tokens": 131,
+      "cost_efficiency": 85999.99999999999,
+      "latency_efficiency": 11.402329025056979,
+      "routing_latency_ms": 0.030583003535866737
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "response": "The main entities extracted from the sentence are:  \n1. **Apple** (Organization)  \n2. **Tim Cook** (Person)  \n3. **iPhone** (Product)  \n4. **WWDC** (Event)  \n\nThese represent the key nouns and concepts central to the statement.",
+      "input_tokens": 45,
+      "output_tokens": 389,
+      "latency_ms": 10518.90954200644,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "task_difficulty": "easy",
+      "task_domain": "math",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "A2A skill match: first delegate with matching capability",
+      "routing_latency_ms": 0.02441700780764222
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nExtract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'\n\n## Response to Evaluate\nThe main entities extracted from the sentence are:  \n1. **Apple** (Organization)  \n2. **Tim Cook** (Person)  \n3. **iPhone** (Product)  \n4. **WWDC** (Event)  \n\nThese represent the key nouns and concepts central to the statement.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 10,\n  \"correctness\": 10,\n  \"completeness\": 10,\n  \"reasoning\": \"The response is perfectly clear, well-structured, and accurately identifies all the main entities from the sentence, correctly categorizing each one. It fully addresses the task.\"\n}\n```",
+      "input_tokens": 216,
+      "output_tokens": 77,
+      "latency_ms": 3135.16270800028,
+      "cost_usd": 7.86e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 10,
+        "correctness": 10,
+        "completeness": 10,
+        "overall": 10.0,
+        "reasoning": "The response is perfectly clear, well-structured, and accurately identifies all the main entities from the sentence, correctly categorizing each one. It fully addresses the task."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-001",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-qwen3-8b",
+      "quality_score": 10.0,
+      "cost_usd": 0.0,
+      "latency_ms": 10518.90954200644,
+      "total_tokens": 434,
+      "cost_efficiency": 100000.0,
+      "latency_efficiency": 0.950668884456681,
+      "routing_latency_ms": 0.02441700780764222
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "llama3.2:3b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "response": "The main entities that can be extracted from the given statement are:\n\n1. **Entity 1: Apple CEO**\n   - **Type:** Organization (Company)\n   - **Description:** Apple Inc. is an American technology company founded in 1976.\n\n2. **Entity 2: Tim Cook**\n   - **Type:** Person\n   - **Description:** Timothy D. Cook is an American businessman, best known as the CEO of Apple Inc.\n\n3. **Entity 3: iPhone**\n   - **Type:** Product\n   - **Description:** iPhone is a series of smartphones designed and marketed by Apple Inc.\n\n4. **Entity 4: WWDC**\n   - **Type:** Event\n   - **Description:** WWDC (Worldwide Developers Conference) is an annual conference where Apple announces new products and updates to its software and services.",
+      "input_tokens": 55,
+      "output_tokens": 173,
+      "latency_ms": 13911.550291988533,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Extract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'",
+      "task_difficulty": "easy",
+      "task_domain": "math",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-llama-3b",
+      "reason": "Random selection",
+      "routing_latency_ms": 0.018749997252598405
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nExtract the main entities from: 'Apple CEO Tim Cook announced new iPhone at WWDC.'\n\n## Response to Evaluate\nThe main entities that can be extracted from the given statement are:\n\n1. **Entity 1: Apple CEO**\n   - **Type:** Organization (Company)\n   - **Description:** Apple Inc. is an American technology company founded in 1976.\n\n2. **Entity 2: Tim Cook**\n   - **Type:** Person\n   - **Description:** Timothy D. Cook is an American businessman, best known as the CEO of Apple Inc.\n\n3. **Entity 3: iPhone**\n   - **Type:** Product\n   - **Description:** iPhone is a series of smartphones designed and marketed by Apple Inc.\n\n4. **Entity 4: WWDC**\n   - **Type:** Event\n   - **Description:** WWDC (Worldwide Developers Conference) is an annual conference where Apple announces new products and updates to its software and services.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 8,\n  \"completeness\": 10,\n  \"reasoning\": \"The response is well-structured and clearly presents the extracted entities with their types and descriptions. It successfully identifies all the main entities from the sentence. The only minor point for correctness is that 'Apple CEO' is listed as the entity representing the 'Organization (Company)', whereas 'Apple' itself is the organization. The description correctly refers to Apple Inc., but the entity label is slightly imprecise.\"\n}\n```",
+      "input_tokens": 333,
+      "output_tokens": 120,
+      "latency_ms": 5338.872333988547,
+      "cost_usd": 0.00012194999999999998
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 8,
+        "completeness": 10,
+        "overall": 8.9,
+        "reasoning": "The response is well-structured and clearly presents the extracted entities with their types and descriptions. It successfully identifies all the main entities from the sentence. The only minor point for correctness is that 'Apple CEO' is listed as the entity representing the 'Organization (Company)', whereas 'Apple' itself is the organization. The description correctly refers to Apple Inc., but the entity label is slightly imprecise."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-easy-001",
+      "difficulty": "easy",
+      "delegate_selected": "delegate-llama-3b",
+      "quality_score": 8.9,
+      "cost_usd": 0.0,
+      "latency_ms": 13911.550291988533,
+      "total_tokens": 228,
+      "cost_efficiency": 89000.0,
+      "latency_efficiency": 0.6397561603989877,
+      "routing_latency_ms": 0.018749997252598405
+    }
+  ]
+}

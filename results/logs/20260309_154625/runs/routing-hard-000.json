@@ -1,0 +1,317 @@
+{
+  "task_id": "routing-hard-000",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "response": "Designing a distributed consensus algorithm that can handle up to 1/3 Byzantine nodes is a challenging problem. One of the most well-known solutions is the Practical Byzantine Fault Tolerance (PBFT) algorithm. Below, I'll describe the PBFT algorithm and then prove its safety property.\n\n### PBFT Algorithm Overview\n\n1. **View Change Mechanism**: The algorithm operates in \"views\", with each view consisting of 3n + 1 rounds. n is the number of non-faulty nodes.\n2. **Pre-prepare Phase**: A primary node prepares a block of transactions and broadcasts a Pre-prepare message to all nodes.\n3. **Prepare Phase**: Nodes prepare the block and broadcast Prepare messages to all nodes.\n4. **Commit Phase**: Nodes commit the block and broadcast Commit messages to all nodes.\n5. **Finalize Phase**: Nodes finalize the block and broadcast Finalize messages to all nodes.\n\n### Safety Property Proof\n\nTo prove the safety property of the PBFT algorithm, we need to show that if a value is decided by a set of nodes, then it is the same value that would be decided by a correct node in the system.\n\n#### Key Definitions:\n- **Decided Value**: A value is decided if it is committed in a view by a quorum (2n + 1 nodes).\n- **Correct Node**: A node that follows the protocol correctly and always behaves honestly.\n- **Byzantine Node**: A node that can deviate arbitrarily from the protocol.\n\n#### Proof Outline:\n1. **Assume a Correct Node Decides a Value**: Suppose a correct node C decides a value V in view V.\n2. **Propagation of Decided Value**: The decided value V will be propagated to all nodes via the Pre-prepare, Prepare, Commit, and Finalize phases.\n3. **Majority Consensus**: By the properties of PBFT:\n   - At least 2n + 1 nodes will receive the Pre-prepare message.\n   - At least 2n + 1 nodes will receive the Prepare message.\n   - At least 2n + 1 nodes will receive the Commit message.\n   - At least 2n + 1 nodes will receive the Finalize message.\n4. **No Byzantine Node Can Alter the Value**: Since up to 1/3 of nodes can be Byzantine, there are at most n Byzantine nodes. Even if all n Byzantine nodes deviate from the protocol, they cannot change the value decided by the correct nodes.\n5. **Consistency of Decided Value**: The value decided by C will be the same value that reaches a quorum of nodes during the propagation phases.\n\n### Detailed Steps of Proof:\n1. **Pre-prepare Phase**: Node C prepares the block and broadcasts it. Since there are 3n + 1 nodes, at least 2n + 1 nodes receive the Pre-prepare message.\n2. **Prepare Phase**: Nodes that receive the Pre-prepare message broadcast Prepare messages. At least 2n + 1 nodes receive the Prepare message.\n3. **Commit Phase**: Nodes that receive the Prepare message broadcast Commit messages. At least 2n + 1 nodes receive the Commit message.\n4. **Finalize Phase**: Nodes that receive the Commit message broadcast Finalize messages. At least 2n + 1 nodes receive the Finalize message.\n\nSince a correct node C decided the value V in view V, and all nodes in a quorum receive this value, the value V will be decided by all nodes in the quorum during the propagation phases. This ensures that the decided value is consistent across all correct nodes.\n\n### Conclusion\nThe PBFT algorithm is safe because it ensures that if a value is decided by a quorum of nodes, it is the same value that would be decided by a correct node in the system. This property holds even in the presence of up to 1/3 Byzantine nodes, making PBFT one of the most robust consensus algorithms for fault-tolerant distributed systems.",
+      "input_tokens": 53,
+      "output_tokens": 826,
+      "latency_ms": 46860.459415998776,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "task_difficulty": "hard",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "A2A skill match: first delegate with matching capability",
+      "routing_latency_ms": 0.005250010872259736
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nDesign a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.\n\n## Response to Evaluate\nDesigning a distributed consensus algorithm that can handle up to 1/3 Byzantine nodes is a challenging problem. One of the most well-known solutions is the Practical Byzantine Fault Tolerance (PBFT) algorithm. Below, I'll describe the PBFT algorithm and then prove its safety property.\n\n### PBFT Algorithm Overview\n\n1. **View Change Mechanism**: The algorithm operates in \"views\", with each view consisting of 3n + 1 rounds. n is the number of non-faulty nodes.\n2. **Pre-prepare Phase**: A primary node prepares a block of transactions and broadcasts a Pre-prepare message to all nodes.\n3. **Prepare Phase**: Nodes prepare the block and broadcast Prepare messages to all nodes.\n4. **Commit Phase**: Nodes commit the block and broadcast Commit messages to all nodes.\n5. **Finalize Phase**: Nodes finalize the block and broadcast Finalize messages to all nodes.\n\n### Safety Property Proof\n\nTo prove the safety property of the PBFT algorithm, we need to show that if a value is decided by a set of nodes, then it is the same value that would be decided by a correct node in the system.\n\n#### Key Definitions:\n- **Decided Value**: A value is decided if it is committed in a view by a quorum (2n + 1 nodes).\n- **Correct Node**: A node that follows the protocol correctly and always behaves honestly.\n- **Byzantine Node**: A node that can deviate arbitrarily from the protocol.\n\n#### Proof Outline:\n1. **Assume a Correct Node Decides a Value**: Suppose a correct node C decides a value V in view V.\n2. **Propagation of Decided Value**: The decided value V will be propagated to all nodes via the Pre-prepare, Prepare, Commit, and Finalize phases.\n3. **Majority Consensus**: By the properties of PBFT:\n   - At least 2n + 1 nodes will receive the Pre-prepare message.\n   - At least 2n + 1 nodes will receive the Prepare message.\n   - At least 2n + 1 nodes will receive the Commit message.\n   - At least 2n + 1 nodes will receive the Finalize message.\n4. **No Byzantine Node Can Alter the Value**: Since up to 1/3 of nodes can be Byzantine, there are at most n Byzantine nodes. Even if all n Byzantine nodes deviate from the protocol, they cannot change the value decided by the correct nodes.\n5. **Consistency of Decided Value**: The value decided by C will be the same value that reaches a quorum of nodes during the propagation phases.\n\n### Detailed Steps of Proof:\n1. **Pre-prepare Phase**: Node C prepares the block and broadcasts it. Since there are 3n + 1 nodes, at least 2n + 1 nodes receive the Pre-prepare message.\n2. **Prepare Phase**: Nodes that receive the Pre-prepare message broadcast Prepare messages. At least 2n + 1 nodes receive the Prepare message.\n3. **Commit Phase**: Nodes that receive the Prepare message broadcast Commit messages. At least 2n + 1 nodes receive the Commit message.\n4. **Finalize Phase**: Nodes that receive the Commit message broadcast Finalize messages. At least 2n + 1 nodes receive the Finalize message.\n\nSince a correct node C decided the value V in view V, and all nodes in a quorum receive this value, the value V will be decided by all nodes in the quorum during the propagation phases. This ensures that the decided value is consistent across all correct nodes.\n\n### Conclusion\nThe PBFT algorithm is safe because it ensures that if a value is decided by a quorum of nodes, it is the same value that would be decided by a correct node in the system. This property holds even in the presence of up to 1/3 Byzantine nodes, making PBFT one of the most robust consensus algorithms for fault-tolerant distributed systems.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 3,\n  \"correctness\": 2,\n  \"completeness\": 4,\n  \"reasoning\": \"The response attempts",
+      "input_tokens": 991,
+      "output_tokens": 40,
+      "latency_ms": 5863.86537499493,
+      "cost_usd": 0.00017265
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 3,
+        "correctness": 2,
+        "completeness": 4,
+        "overall": 2.9,
+        "reasoning": "The response attempts"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-hard-000",
+      "difficulty": "hard",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "generic",
+      "quality_score": 2.9,
+      "cost_usd": 0.0,
+      "latency_ms": 46860.459415998776,
+      "total_tokens": 879,
+      "cost_efficiency": 28999.999999999996,
+      "latency_efficiency": 0.06188586360742981,
+      "routing_latency_ms": 0.005250010872259736
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "response": "",
+      "input_tokens": 55,
+      "output_tokens": 2048,
+      "latency_ms": 85991.24612499145,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "task_difficulty": "hard",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "Ablation[ldp_generic_prompt]: LDP metadata routing, generic prompt. quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.009125011274591088
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nDesign a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.\n\n## Response to Evaluate\n\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 0,\n  \"correctness\": 0,\n  \"completeness\": 0,\n  \"reasoning\": \"The 'Response to Evaluate' section was empty. Therefore, no content was provided to assess on quality, correctness, or completeness.\"\n}\n```",
+      "input_tokens": 159,
+      "output_tokens": 67,
+      "latency_ms": 1782.3346659715753,
+      "cost_usd": 6.405e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 0,
+        "correctness": 0,
+        "completeness": 0,
+        "overall": 0.0,
+        "reasoning": "The 'Response to Evaluate' section was empty. Therefore, no content was provided to assess on quality, correctness, or completeness."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-hard-000",
+      "difficulty": "hard",
+      "delegate_selected": "delegate-qwen3-8b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "generic",
+      "quality_score": 0.0,
+      "cost_usd": 0.0,
+      "latency_ms": 85991.24612499145,
+      "total_tokens": 2103,
+      "cost_efficiency": 0.0,
+      "latency_efficiency": 0.0,
+      "routing_latency_ms": 0.009125011274591088
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen-coder (qwen2.5-coder:7b). Capabilities: code, code-review, debugging, analysis. Respond to the task thoroughly.",
+      "prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "response": "To design a distributed consensus algorithm that can handle up to 1/3 Byzantine nodes, we can use the Practical Byzantine Fault Tolerance (PBFT) algorithm. PBFT is a consensus protocol that operates with a quorum-based approach and ensures safety in the presence of up to 1/3 faulty nodes.\n\n### PBFT Algorithm Overview\n\nPBFT is a 3-round consensus algorithm that consists of the following phases:\n\n1. **Pre-Prepare Phase**: Nodes propose a request.\n2. **Prepare Phase**: Nodes prepare the request.\n3. **Commit Phase**: Nodes commit to the proposal.\n\n### PBFT Protocol Details\n\n#### Step 1: Pre-Prepare Phase\n- A primary node (chosen based on a deterministic scheme) is responsible for proposing a request.\n- The primary node broadcasts a `Pre-Prepare` message to all other nodes containing the request and its identifier.\n\n#### Step 2: Prepare Phase\n- Nodes receive the `Pre-Prepare` message and check if they have seen this message before.\n- Nodes broadcast a `Prepare` message to all other nodes containing the request, identifier, and the primary node's `Pre-Prepare` message.\n\n#### Step 3: Commit Phase\n- Nodes receive the `Prepare` message and check if they have seen this message before.\n- Nodes broadcast a `Commit` message to all other nodes containing the request, identifier, and the primary node's `Pre-Prepare` message.\n\n#### Consensus\n- Once a node has received `2f+1` `Pre-Prepare` messages (where `f` is the number of faulty nodes), it considers the proposal prepared.\n- Once a node has received `2f+1` `Prepare` messages, it considers the proposal prepared.\n- Once a node has received `2f+1` `Commit` messages, it considers the proposal committed.\n\n### Safety Property\n\nThe safety property of PBFT ensures that if a value is proposed and committed, then no other value can be proposed and committed later. This property is formally proven using a combination of logical arguments and formal methods.\n\n#### Proof Outline\n\n1. **Pre-Prepare Message Consistency**: Each node must receive the same `Pre-Prepare` message from the primary node.\n2. **Prepare Message Consistency**: Each node must receive the same `Prepare` message.\n3. **Commit Message Consistency**: Each node must receive the same `Commit` message.\n4. **Unanimity**: If a value is proposed and committed, all nodes must agree on this value.\n\n### Proof of Safety\n\n- **Assume a Faulty Primary**: If the primary node is faulty, it will propose a value.\n- **Pre-Prepare Phase**: The faulty primary will broadcast a `Pre-Prepare` message.\n- **Prepare Phase**: All nodes (including the faulty ones) will broadcast a `Prepare` message.\n- **Commit Phase**: All nodes (including the faulty ones) will broadcast a `Commit` message.\n- **Commit Consensus**: Since there are `2f+1` `Commit` messages, the protocol ensures that all nodes will commit to the same value.\n\n- **Assume a Faulty Node**: If a node is faulty, it will not broadcast a `Pre-Prepare`, `Prepare`, or `Commit` message.\n- **Pre-Prepare Phase**: The primary will receive messages from `f+1` nodes (since `2f+1` nodes are required for a quorum).\n- **Prepare Phase**: The primary will receive messages from `f+1` nodes.\n- **Commit Phase**: The primary will receive messages from `f+1` nodes.\n\nSince there are `2f+1` `Commit` messages, the primary will commit to a value. The faulty node's behavior does not affect the commitment of the value by other nodes.\n\n### Conclusion\n\nThe PBFT algorithm ensures safety in the presence of up to 1/3 faulty nodes. The safety property is formally proven using logical arguments and formal methods, ensuring that if a value is proposed and committed, no other value can be proposed and committed later.",
+      "input_tokens": 79,
+      "output_tokens": 841,
+      "latency_ms": 42900.27816599468,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "task_difficulty": "hard",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "Ablation[a2a_ldp_prompt]: A2A skill-match routing, LDP prompt",
+      "routing_latency_ms": 0.006249989382922649
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nDesign a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.\n\n## Response to Evaluate\nTo design a distributed consensus algorithm that can handle up to 1/3 Byzantine nodes, we can use the Practical Byzantine Fault Tolerance (PBFT) algorithm. PBFT is a consensus protocol that operates with a quorum-based approach and ensures safety in the presence of up to 1/3 faulty nodes.\n\n### PBFT Algorithm Overview\n\nPBFT is a 3-round consensus algorithm that consists of the following phases:\n\n1. **Pre-Prepare Phase**: Nodes propose a request.\n2. **Prepare Phase**: Nodes prepare the request.\n3. **Commit Phase**: Nodes commit to the proposal.\n\n### PBFT Protocol Details\n\n#### Step 1: Pre-Prepare Phase\n- A primary node (chosen based on a deterministic scheme) is responsible for proposing a request.\n- The primary node broadcasts a `Pre-Prepare` message to all other nodes containing the request and its identifier.\n\n#### Step 2: Prepare Phase\n- Nodes receive the `Pre-Prepare` message and check if they have seen this message before.\n- Nodes broadcast a `Prepare` message to all other nodes containing the request, identifier, and the primary node's `Pre-Prepare` message.\n\n#### Step 3: Commit Phase\n- Nodes receive the `Prepare` message and check if they have seen this message before.\n- Nodes broadcast a `Commit` message to all other nodes containing the request, identifier, and the primary node's `Pre-Prepare` message.\n\n#### Consensus\n- Once a node has received `2f+1` `Pre-Prepare` messages (where `f` is the number of faulty nodes), it considers the proposal prepared.\n- Once a node has received `2f+1` `Prepare` messages, it considers the proposal prepared.\n- Once a node has received `2f+1` `Commit` messages, it considers the proposal committed.\n\n### Safety Property\n\nThe safety property of PBFT ensures that if a value is proposed and committed, then no other value can be proposed and committed later. This property is formally proven using a combination of logical arguments and formal methods.\n\n#### Proof Outline\n\n1. **Pre-Prepare Message Consistency**: Each node must receive the same `Pre-Prepare` message from the primary node.\n2. **Prepare Message Consistency**: Each node must receive the same `Prepare` message.\n3. **Commit Message Consistency**: Each node must receive the same `Commit` message.\n4. **Unanimity**: If a value is proposed and committed, all nodes must agree on this value.\n\n### Proof of Safety\n\n- **Assume a Faulty Primary**: If the primary node is faulty, it will propose a value.\n- **Pre-Prepare Phase**: The faulty primary will broadcast a `Pre-Prepare` message.\n- **Prepare Phase**: All nodes (including the faulty ones) will broadcast a `Prepare` message.\n- **Commit Phase**: All nodes (including the faulty ones) will broadcast a `Commit` message.\n- **Commit Consensus**: Since there are `2f+1` `Commit` messages, the protocol ensures that all nodes will commit to the same value.\n\n- **Assume a Faulty Node**: If a node is faulty, it will not broadcast a `Pre-Prepare`, `Prepare`, or `Commit` message.\n- **Pre-Prepare Phase**: The primary will receive messages from `f+1` nodes (since `2f+1` nodes are required for a quorum).\n- **Prepare Phase**: The primary will receive messages from `f+1` nodes.\n- **Commit Phase**: The primary will receive messages from `f+1` nodes.\n\nSince there are `2f+1` `Commit` messages, the primary will commit to a value. The faulty node's behavior does not affect the commitment of the value by other nodes.\n\n### Conclusion\n\nThe PBFT algorithm ensures safety in the presence of up to 1/3 faulty nodes. The safety property is formally proven using logical arguments and formal methods, ensuring that if a value is proposed and committed, no other value can be proposed and committed later.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 3,\n  \"correctness\": 3,\n  \"completeness\": 4,\n  \"reasoning\": \"The",
+      "input_tokens": 1021,
+      "output_tokens": 38,
+      "latency_ms": 6247.157292003976,
+      "cost_usd": 0.00017595000000000002
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 3,
+        "correctness": 3,
+        "completeness": 4,
+        "overall": 3.3,
+        "reasoning": "The"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-hard-000",
+      "difficulty": "hard",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "identity",
+      "quality_score": 3.3,
+      "cost_usd": 0.0,
+      "latency_ms": 42900.27816599468,
+      "total_tokens": 920,
+      "cost_efficiency": 33000.0,
+      "latency_efficiency": 0.07692257815278636,
+      "routing_latency_ms": 0.006249989382922649
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen3-8b (qwen3:8b). Capabilities: reasoning, code, analysis, math. Respond to the task thoroughly.",
+      "prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "response": "",
+      "input_tokens": 78,
+      "output_tokens": 2048,
+      "latency_ms": 86049.35408302117,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Design a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.",
+      "task_difficulty": "hard",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "LDP metadata routing: quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.010041985660791397
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nDesign a distributed consensus algorithm for a network where up to 1/3 of nodes may be Byzantine, and prove its safety property.\n\n## Response to Evaluate\n\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 1,\n  \"correctness\": 1,\n  \"completeness\": 1,\n  \"reasoning\": \"The 'Response to Evaluate' section is empty. Therefore, there is no content to assess for quality, correctness, or completeness. Scores are set to 1 as a placeholder for 'no response provided'.\"\n}\n```",
+      "input_tokens": 159,
+      "output_tokens": 82,
+      "latency_ms": 2217.3432080016937,
+      "cost_usd": 7.305e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 1,
+        "correctness": 1,
+        "completeness": 1,
+        "overall": 1.0,
+        "reasoning": "The 'Response to Evaluate' section is empty. Therefore, there is no content to assess for quality, correctness, or completeness. Scores are set to 1 as a placeholder for 'no response provided'."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-hard-000",
+      "difficulty": "hard",
+      "delegate_selected": "delegate-qwen3-8b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "identity",
+      "quality_score": 1.0,
+      "cost_usd": 0.0,
+      "latency_ms": 86049.35408302117,
+      "total_tokens": 2126,
+      "cost_efficiency": 10000.0,
+      "latency_efficiency": 0.011621237726377251,
+      "routing_latency_ms": 0.010041985660791397
+    }
+  ]
+}

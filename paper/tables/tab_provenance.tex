@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\caption{Provenance impact on synthesis quality (RQ3). Accurate provenance provides modest quality improvement, but noisy (misleading) provenance degrades quality and increases variance, arguing for LDP's structured verification fields.}
+\label{tab:provenance}
+\begin{tabular}{lccc}
+\toprule
+Condition & Decision Quality & Calibration & Synth. Tokens \\
+\midrule
+With Provenance & $7.65 \pm 1.21$ & $9.13 \pm 0.83$ & 970 \\
+Without Provenance & $7.85 \pm 1.84$ & $9.33 \pm 0.72$ & 802 \\
+Noisy Provenance & $6.85 \pm 2.66$ & $7.87 \pm 2.90$ & 1018 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,296 @@
+[
+  {
+    "experiment": "payload",
+    "condition": "mode0_text",
+    "n_runs": 20,
+    "metrics": {
+      "token_count": {
+        "name": "token_count",
+        "mean": 1214.9,
+        "median": 807.5,
+        "std": 751.3907,
+        "ci_95": [
+          878.8679,
+          1550.9321
+        ],
+        "min": 425.0,
+        "max": 2199.0,
+        "n": 20
+      },
+      "wall_clock_ms": {
+        "name": "wall_clock_ms",
+        "mean": 24096.0017,
+        "median": 14240.529,
+        "std": 20636.5726,
+        "ci_95": [
+          14867.0458,
+          33324.9575
+        ],
+        "min": 2967.6123,
+        "max": 54122.1214,
+        "n": 20
+      },
+      "information_preserved": {
+        "name": "information_preserved",
+        "mean": 5.85,
+        "median": 8.0,
+        "std": 4.2584,
+        "ci_95": [
+          3.9456,
+          7.7544
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 20
+      },
+      "output_quality": {
+        "name": "output_quality",
+        "mean": 5.54,
+        "median": 6.55,
+        "std": 4.0533,
+        "ci_95": [
+          3.7273,
+          7.3527
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 20
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 20
+      },
+      "input_tokens": {
+        "name": "input_tokens",
+        "mean": 140.25,
+        "median": 151.0,
+        "std": 23.3055,
+        "ci_95": [
+          129.8275,
+          150.6725
+        ],
+        "min": 110.0,
+        "max": 163.0,
+        "n": 20
+      },
+      "output_tokens": {
+        "name": "output_tokens",
+        "mean": 1074.65,
+        "median": 672.5,
+        "std": 745.0632,
+        "ci_95": [
+          741.4476,
+          1407.8524
+        ],
+        "min": 273.0,
+        "max": 2048.0,
+        "n": 20
+      }
+    }
+  },
+  {
+    "experiment": "payload",
+    "condition": "mode1_semantic_frame",
+    "n_runs": 20,
+    "metrics": {
+      "token_count": {
+        "name": "token_count",
+        "mean": 765.4,
+        "median": 668.5,
+        "std": 510.2487,
+        "ci_95": [
+          537.2098,
+          993.5902
+        ],
+        "min": 193.0,
+        "max": 1784.0,
+        "n": 20
+      },
+      "wall_clock_ms": {
+        "name": "wall_clock_ms",
+        "mean": 14015.5223,
+        "median": 6468.0364,
+        "std": 13764.1814,
+        "ci_95": [
+          7859.9933,
+          20171.0514
+        ],
+        "min": 1663.152,
+        "max": 43141.4614,
+        "n": 20
+      },
+      "information_preserved": {
+        "name": "information_preserved",
+        "mean": 5.5,
+        "median": 5.0,
+        "std": 3.0349,
+        "ci_95": [
+          4.1428,
+          6.8572
+        ],
+        "min": 1.0,
+        "max": 10.0,
+        "n": 20
+      },
+      "output_quality": {
+        "name": "output_quality",
+        "mean": 5.7,
+        "median": 5.5,
+        "std": 2.9275,
+        "ci_95": [
+          4.3908,
+          7.0092
+        ],
+        "min": 1.4,
+        "max": 10.0,
+        "n": 20
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 20
+      },
+      "input_tokens": {
+        "name": "input_tokens",
+        "mean": 130.5,
+        "median": 128.0,
+        "std": 12.5132,
+        "ci_95": [
+          124.9039,
+          136.0961
+        ],
+        "min": 118.0,
+        "max": 148.0,
+        "n": 20
+      },
+      "output_tokens": {
+        "name": "output_tokens",
+        "mean": 634.9,
+        "median": 522.5,
+        "std": 509.6354,
+        "ci_95": [
+          406.9841,
+          862.8159
+        ],
+        "min": 75.0,
+        "max": 1656.0,
+        "n": 20
+      }
+    }
+  },
+  {
+    "experiment": "payload",
+    "condition": "a2a_json",
+    "n_runs": 20,
+    "metrics": {
+      "token_count": {
+        "name": "token_count",
+        "mean": 1128.3,
+        "median": 730.5,
+        "std": 804.0248,
+        "ci_95": [
+          768.7292,
+          1487.8708
+        ],
+        "min": 302.0,
+        "max": 2176.0,
+        "n": 20
+      },
+      "wall_clock_ms": {
+        "name": "wall_clock_ms",
+        "mean": 23388.983,
+        "median": 8263.9345,
+        "std": 22362.0438,
+        "ci_95": [
+          13388.373,
+          33389.5931
+        ],
+        "min": 4249.2037,
+        "max": 55016.6564,
+        "n": 20
+      },
+      "information_preserved": {
+        "name": "information_preserved",
+        "mean": 5.75,
+        "median": 6.5,
+        "std": 3.8916,
+        "ci_95": [
+          4.0096,
+          7.4904
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 20
+      },
+      "output_quality": {
+        "name": "output_quality",
+        "mean": 5.47,
+        "median": 6.3,
+        "std": 3.9825,
+        "ci_95": [
+          3.689,
+          7.251
+        ],
+        "min": 0.0,
+        "max": 9.7,
+        "n": 20
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 20
+      },
+      "input_tokens": {
+        "name": "input_tokens",
+        "mean": 115.3,
+        "median": 128.0,
+        "std": 23.855,
+        "ci_95": [
+          104.6317,
+          125.9683
+        ],
+        "min": 84.0,
+        "max": 137.0,
+        "n": 20
+      },
+      "output_tokens": {
+        "name": "output_tokens",
+        "mean": 1013.0,
+        "median": 620.0,
+        "std": 792.2019,
+        "ci_95": [
+          658.7165,
+          1367.2835
+        ],
+        "min": 218.0,
+        "max": 2048.0,
+        "n": 20
+      }
+    }
+  }
+]

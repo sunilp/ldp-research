@@ -1,0 +1,120 @@
+[
+  {
+    "experiment": "fallback",
+    "condition": "ldp_fallback",
+    "n_runs": 20,
+    "metrics": {
+      "completion_rate": {
+        "name": "completion_rate",
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "n": 20
+      },
+      "quality_degradation": {
+        "name": "quality_degradation",
+        "mean": 0.164,
+        "median": 0.15,
+        "std": 0.1014,
+        "ci_95": [
+          0.1187,
+          0.2094
+        ],
+        "min": 0.0,
+        "max": 0.388,
+        "n": 20
+      },
+      "recovery_latency_ms": {
+        "name": "recovery_latency_ms",
+        "mean": 112.5,
+        "median": 100.0,
+        "std": 57.754,
+        "ci_95": [
+          86.6716,
+          138.3284
+        ],
+        "min": 50.0,
+        "max": 200.0,
+        "n": 20
+      },
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 8.3598,
+        "median": 8.5,
+        "std": 1.014,
+        "ci_95": [
+          7.9063,
+          8.8132
+        ],
+        "min": 6.12,
+        "max": 10.0,
+        "n": 20
+      }
+    }
+  },
+  {
+    "experiment": "fallback",
+    "condition": "a2a_no_fallback",
+    "n_runs": 20,
+    "metrics": {
+      "completion_rate": {
+        "name": "completion_rate",
+        "mean": 0.35,
+        "median": 0.0,
+        "std": 0.4894,
+        "ci_95": [
+          0.1312,
+          0.5688
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 20
+      },
+      "quality_degradation": {
+        "name": "quality_degradation",
+        "mean": 0.6725,
+        "median": 1.0,
+        "std": 0.4594,
+        "ci_95": [
+          0.467,
+          0.878
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 20
+      },
+      "recovery_latency_ms": {
+        "name": "recovery_latency_ms",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 20
+      },
+      "quality_score": {
+        "name": "quality_score",
+        "mean": 3.275,
+        "median": 0.0,
+        "std": 4.5945,
+        "ci_95": [
+          1.2203,
+          5.3297
+        ],
+        "min": 0.0,
+        "max": 10.0,
+        "n": 20
+      }
+    }
+  }
+]

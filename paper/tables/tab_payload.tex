@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\caption{Payload mode efficiency comparison (RQ2). Semantic frames reduce token count by 37\% and latency by 42\% compared to raw text, with no observed quality loss ($p=0.96$). Token reduction is statistically significant ($p=0.031$, $d=-0.7$).}
+\label{tab:payload}
+\begin{tabular}{lcccc}
+\toprule
+Mode & Tokens & Latency (s) & Quality & Info Preserved \\
+\midrule
+Text (Mode 0) & $1215 \pm 751$ & 24.1 & $5.54 \pm 4.05$ & $5.85 \pm 4.26$ \\
+Semantic Frame (Mode 1) & $765 \pm 510$ & 14.0 & $5.70 \pm 2.93$ & $5.50 \pm 3.03$ \\
+A2A JSON & $1128 \pm 804$ & 23.4 & $5.47 \pm 3.98$ & $5.75 \pm 3.89$ \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,237 @@
+# LDP Research — Experiment Configuration
+#
+# 6 experiments, 4 baselines, ~1,730 total runs.
+# Each experiment tests a specific LDP contribution against baselines.
+
+defaults:
+  llm_judge_model: "claude-sonnet-4-20250514"
+  llm_judge_provider: "anthropic"
+  max_retries: 2
+  timeout_secs: 120
+  output_dir: "results"
+  data_dir: "data"
+
+# Delegate pool used across experiments
+delegates:
+  - id: "delegate-claude-opus"
+    model: "claude-opus-4-20250514"
+    provider: "anthropic"
+    capabilities: ["reasoning", "code", "analysis", "math"]
+    quality_hint: 0.95
+    cost_hint: "high"
+    latency_hint: "p50:5000ms"
+    reasoning_profile: "deep-analytical"
+
+  - id: "delegate-claude-sonnet"
+    model: "claude-sonnet-4-20250514"
+    provider: "anthropic"
+    capabilities: ["reasoning", "code", "analysis"]
+    quality_hint: 0.85
+    cost_hint: "medium"
+    latency_hint: "p50:2000ms"
+    reasoning_profile: "balanced"
+
+  - id: "delegate-claude-haiku"
+    model: "claude-haiku-4-5-20251001"
+    provider: "anthropic"
+    capabilities: ["classification", "extraction", "simple-reasoning"]
+    quality_hint: 0.70
+    cost_hint: "low"
+    latency_hint: "p50:500ms"
+    reasoning_profile: "fast-practical"
+
+  - id: "delegate-gpt4o"
+    model: "gpt-4o"
+    provider: "openai"
+    capabilities: ["reasoning", "code", "analysis", "vision"]
+    quality_hint: 0.90
+    cost_hint: "medium"
+    latency_hint: "p50:3000ms"
+    reasoning_profile: "general-purpose"
+
+  - id: "delegate-gpt4o-mini"
+    model: "gpt-4o-mini"
+    provider: "openai"
+    capabilities: ["classification", "extraction", "simple-reasoning"]
+    quality_hint: 0.65
+    cost_hint: "low"
+    latency_hint: "p50:400ms"
+    reasoning_profile: "fast-practical"
+
+experiments:
+  # ─── Experiment 1: Routing Quality (RQ1) ──────────────────────────
+  routing:
+    name: "Routing Quality"
+    research_question: "RQ1"
+    description: "Does AI-native identity improve delegation routing quality?"
+    task_count: 100
+    conditions:
+      - name: "ldp"
+        protocol: "ldp"
+        routing: "metadata"  # Uses model family, quality_hint, reasoning_profile
+      - name: "a2a"
+        protocol: "a2a"
+        routing: "skill_match"  # Uses skill name + description only
+      - name: "random"
+        protocol: "a2a"
+        routing: "random"
+    task_distribution:
+      easy: 30
+      medium: 40
+      hard: 30
+    metrics:
+      - "quality_score"      # LLM-as-judge 1-10
+      - "cost_efficiency"    # quality / cost
+      - "latency_efficiency" # quality / latency
+      - "routing_precision"  # did best delegate get the task?
+    total_runs: 300
+
+  # ─── Ablation: Routing vs Prompting (2x2 Factorial) ────────────────
+  ablation:
+    name: "Routing vs Prompting Ablation"
+    research_question: "RQ1-ablation"
+    description: >
+      2x2 factorial design crossing routing strategy (A2A skill-match vs LDP
+      metadata-aware) with prompting strategy (generic vs identity-enriched).
+      Isolates whether LDP's advantage comes from routing, prompting, or both.
+    task_count: 100
+    conditions:
+      - name: "a2a"
+        routing: "skill_match"
+        prompt: "generic"
+        protocol: "a2a"
+      - name: "ldp_generic_prompt"
+        routing: "metadata"
+        prompt: "generic"
+        protocol: "ldp_generic_prompt"
+      - name: "a2a_ldp_prompt"
+        routing: "skill_match"
+        prompt: "identity"
+        protocol: "a2a_ldp_prompt"
+      - name: "ldp"
+        routing: "metadata"
+        prompt: "identity"
+        protocol: "ldp"
+    task_distribution:
+      easy: 30
+      medium: 40
+      hard: 30
+    metrics:
+      - "quality_score"
+      - "cost_efficiency"
+      - "latency_efficiency"
+      - "routing_precision"
+    total_runs: 400
+
+  # ─── Experiment 2: Payload Mode Efficiency (RQ2) ──────────────────
+  payload:
+    name: "Payload Mode Efficiency"
+    research_question: "RQ2"
+    description: "Does payload mode negotiation improve communication efficiency?"
+    task_count: 50
+    conditions:
+      - name: "mode0_text"
+        payload_mode: "text"
+      - name: "mode1_semantic_frame"
+        payload_mode: "semantic_frame"
+      - name: "a2a_json"
+        protocol: "a2a"
+    task_types:
+      - "reasoning_handoff"
+      - "context_transfer"
+      - "verification"
+    metrics:
+      - "token_count"           # Total tokens per exchange
+      - "wall_clock_ms"         # Latency per exchange
+      - "information_preserved" # LLM-judge: did receiver reconstruct sender's reasoning?
+      - "output_quality"        # Quality of final output
+    total_runs: 300  # 50 tasks × 3 conditions × 2 task pairings
+
+  # ─── Experiment 3: Provenance Value (RQ3) ─────────────────────────
+  provenance:
+    name: "Provenance Value"
+    research_question: "RQ3"
+    description: "Does structured provenance improve downstream decision quality?"
+    task_count: 50
+    conditions:
+      - name: "with_provenance"
+        provenance: true
+      - name: "without_provenance"
+        provenance: false
+      - name: "noisy_provenance"
+        provenance: true
+        noise: true  # Some delegates report inflated confidence
+    metrics:
+      - "decision_quality"     # Expert evaluation of final synthesis
+      - "calibration_accuracy" # Correct weighting of high vs low confidence
+      - "error_detection_rate" # Catching bad results
+    total_runs: 150
+
+  # ─── Experiment 4: Session Efficiency (RQ4) ───────────────────────
+  sessions:
+    name: "Session Efficiency"
+    research_question: "RQ4"
+    description: "Do governed sessions reduce overhead for multi-round tasks?"
+    task_count: 30
+    conditions:
+      - name: "ldp_session"
+        protocol: "ldp"
+        session: true
+      - name: "a2a_stateless"
+        protocol: "a2a"
+        session: false
+    round_counts: [3, 5, 10]
+    metrics:
+      - "total_messages"    # Including overhead
+      - "total_tokens"      # Including context re-establishment
+      - "end_to_end_ms"     # Total latency
+      - "context_preserved" # Did stateless mode lose context?
+    total_runs: 180  # 30 × 2 × 3
+
+  # ─── Experiment 5: Security Boundaries (RQ5) ─────────────────────
+  security:
+    name: "Security Boundary Enforcement"
+    research_question: "RQ5"
+    description: "Do trust domains prevent unauthorized cross-boundary delegation?"
+    scenario_count: 50
+    conditions:
+      - name: "ldp_trust_domains"
+        protocol: "ldp"
+        trust_enforcement: true
+      - name: "a2a_auth"
+        protocol: "a2a"
+        trust_enforcement: false  # Bearer token only
+    injection_types:
+      - "untrusted_domain_join"
+      - "capability_escalation"
+      - "replay_attack"
+      - "cross_domain_no_auth"
+    metrics:
+      - "detection_rate"       # Unauthorized attempts caught
+      - "false_positive_rate"  # Legitimate requests incorrectly blocked
+      - "attack_surface"       # Qualitative comparison
+    total_runs: 100
+
+  # ─── Experiment 6: Fallback Reliability (RQ6) ────────────────────
+  fallback:
+    name: "Fallback Reliability"
+    research_question: "RQ6"
+    description: "Does fallback improve end-to-end reliability?"
+    task_count: 50
+    conditions:
+      - name: "ldp_fallback"
+        protocol: "ldp"
+        fallback: true
+      - name: "a2a_no_fallback"
+        protocol: "a2a"
+        fallback: false
+    failure_types:
+      - "schema_mismatch"
+      - "codec_incompatibility"
+      - "version_mismatch"
+      - "timeout_degradation"
+    metrics:
+      - "completion_rate"       # Tasks completed despite failures
+      - "quality_degradation"   # Quality loss in fallback vs preferred
+      - "recovery_latency_ms"   # Time to detect + fallback
+    total_runs: 400  # 50 × 4 × 2

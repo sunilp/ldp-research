@@ -1,0 +1,317 @@
+{
+  "task_id": "routing-medium-000",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "response": "The provided Python function for computing the Fibonacci sequence is recursive, which is not an issue per se. However, it has several potential bugs and inefficiencies that can be addressed:\n1. Base case issues:\n   The base case is correctly handled for n = 0 and n = 1, but it would be clearer to explicitly return 0 for n = 0.\n2. Inefficient recursion:\n   The current implementation has an exponential time complexity of O(2^n) due to repeated calculations of the same Fibonacci numbers. This is because each function call branches into two more calls, leading to a lot of redundant computations.\n3. Incorrect handling of negative inputs:\n   The function does not handle negative inputs gracefully. For negative n, the function will enter an infinite recursion, leading to a stack overflow error.\n4. Lack of input validation:\n   The function does not check if the input is a non-negative integer, which could lead to unexpected behavior or errors.\nTo improve the function, we can implement an iterative version with memoization or a bottom-up dynamic programming approach. Here's an improved version using memoization with Python's functools.lru_cache decorator:\n```python\nfrom functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer\")\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```\nThis version has a time complexity of O(n) and a space complexity of O(n) due to the memoization cache. It also handles negative inputs and raises a ValueError if the input is not a non-negative integer.\nAlternatively, we can use an iterative approach with a bottom-up dynamic programming approach:\n```python\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer\")\n    elif n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    fib = [0] * (n + 1)\n    fib[1] = 1\n    for i in range(2, n + 1):\n        fib[i] = fib[i-1] + fib[i-2]\n    \n    return fib[n]\n```\nThis version also has a time complexity of O(n) and a space complexity of O(n), but it is more efficient in terms of space as it only uses a fixed-size array to store the Fibonacci numbers up to n.",
+      "input_tokens": 62,
+      "output_tokens": 531,
+      "latency_ms": 21600.515291997,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "task_difficulty": "medium",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "A2A skill match: first delegate with matching capability",
+      "routing_latency_ms": 0.010499992640689015
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nReview this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n## Response to Evaluate\nThe provided Python function for computing the Fibonacci sequence is recursive, which is not an issue per se. However, it has several potential bugs and inefficiencies that can be addressed:\n1. Base case issues:\n   The base case is correctly handled for n = 0 and n = 1, but it would be clearer to explicitly return 0 for n = 0.\n2. Inefficient recursion:\n   The current implementation has an exponential time complexity of O(2^n) due to repeated calculations of the same Fibonacci numbers. This is because each function call branches into two more calls, leading to a lot of redundant computations.\n3. Incorrect handling of negative inputs:\n   The function does not handle negative inputs gracefully. For negative n, the function will enter an infinite recursion, leading to a stack overflow error.\n4. Lack of input validation:\n   The function does not check if the input is a non-negative integer, which could lead to unexpected behavior or errors.\nTo improve the function, we can implement an iterative version with memoization or a bottom-up dynamic programming approach. Here's an improved version using memoization with Python's functools.lru_cache decorator:\n```python\nfrom functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer\")\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```\nThis version has a time complexity of O(n) and a space complexity of O(n) due to the memoization cache. It also handles negative inputs and raises a ValueError if the input is not a non-negative integer.\nAlternatively, we can use an iterative approach with a bottom-up dynamic programming approach:\n```python\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer\")\n    elif n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    fib = [0] * (n + 1)\n    fib[1] = 1\n    for i in range(2, n + 1):\n        fib[i] = fib[i-1] + fib[i-2]\n    \n    return fib[n]\n```\nThis version also has a time complexity of O(n) and a space complexity of O(n), but it is more efficient in terms of space as it only uses a fixed-size array to store the Fibonacci numbers up to n.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\": 9,\n  \"completeness\": 9,\n  \"reasoning\": \"The response effectively identifies",
+      "input_tokens": 773,
+      "output_tokens": 41,
+      "latency_ms": 5934.926292015007,
+      "cost_usd": 0.00014054999999999997
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 9,
+        "correctness": 9,
+        "completeness": 9,
+        "overall": 9.0,
+        "reasoning": "The response effectively identifies"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-000",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "generic",
+      "quality_score": 9.0,
+      "cost_usd": 0.0,
+      "latency_ms": 21600.515291997,
+      "total_tokens": 593,
+      "cost_efficiency": 90000.0,
+      "latency_efficiency": 0.41665672685755345,
+      "routing_latency_ms": 0.010499992640689015
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are an AI assistant. Respond to the task thoroughly.",
+      "prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "response": "The provided Python function for calculating Fibonacci numbers has several issues that need correction and optimization. Here's a detailed review and suggested improvements:\n\n---\n\n### **Bugs and Issues**\n1. **Syntax Error**:  \n   The line `return fibonacci(n-1) + fibonacci(n-2) /think` contains an unintended `/think` which is not valid Python syntax. This would raise a `SyntaxError`. The correct operator should be `+` to compute the sum of the two previous Fibonacci numbers.\n\n2. **Negative Input Handling**:  \n   The function does not validate inputs. For `n < 0`, it returns a negative value (e.g., `n = -5` returns `-5`), which is incorrect for the Fibonacci sequence (typically defined for non-negative integers).\n\n3. **Inefficiency**:  \n   The recursive approach has exponential time complexity (`O(2^n)`) due to redundant calculations. For example, `fibonacci(5)` recalculates `fibonacci(3)` multiple times, leading to poor performance for large `n`.\n\n---\n\n### **Improved Implementation**\nHere\u2019s a corrected and optimized version of the function:\n\n```python\nfrom functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input should be a non-negative integer\")\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n```\n\n#### **Key Improvements**\n1. **Syntax Fix**:  \n   Replaced `/think` with `+` to correctly compute the sum of the two previous Fibonacci numbers.\n\n2. **Input Validation**:  \n   Raises a `ValueError` for negative inputs, ensuring the function adheres to the Fibonacci sequence's domain.\n\n3. **Memoization**:  \n   Uses `@lru_cache` to memoize results, reducing time complexity to `O(n)` while maintaining recursion.\n\n---\n\n### **Alternative: Iterative Approach**\nFor even better",
+      "input_tokens": 64,
+      "output_tokens": 2048,
+      "latency_ms": 93508.99400000344,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "task_difficulty": "medium",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "Ablation[ldp_generic_prompt]: LDP metadata routing, generic prompt. quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.0077500008046627045
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nReview this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n## Response to Evaluate\nThe provided Python function for calculating Fibonacci numbers has several issues that need correction and optimization. Here's a detailed review and suggested improvements:\n\n---\n\n### **Bugs and Issues**\n1. **Syntax Error**:  \n   The line `return fibonacci(n-1) + fibonacci(n-2) /think` contains an unintended `/think` which is not valid Python syntax. This would raise a `SyntaxError`. The correct operator should be `+` to compute the sum of the two previous Fibonacci numbers.\n\n2. **Negative Input Handling**:  \n   The function does not validate inputs. For `n < 0`, it returns a negative value (e.g., `n = -5` returns `-5`), which is incorrect for the Fibonacci sequence (typically defined for non-negative integers).\n\n3. **Inefficiency**:  \n   The recursive approach has exponential time complexity (`O(2^n)`) due to redundant calculations. For example, `fibonacci(5)` recalculates `fibonacci(3)` multiple times, leading to poor performance for large `n`.\n\n---\n\n### **Improved Implementation**\nHere\u2019s a corrected and optimized version of the function:\n\n```python\nfrom functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fibonacci(n):\n    if n < 0:\n        raise ValueError(\"Input should be a non-negative integer\")\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n```\n\n#### **Key Improvements**\n1. **Syntax Fix**:  \n   Replaced `/think` with `+` to correctly compute the sum of the two previous Fibonacci numbers.\n\n2. **Input Validation**:  \n   Raises a `ValueError` for negative inputs, ensuring the function adheres to the Fibonacci sequence's domain.\n\n3. **Memoization**:  \n   Uses `@lru_cache` to memoize results, reducing time complexity to `O(n)` while maintaining recursion.\n\n---\n\n### **Alternative: Iterative Approach**\nFor even better\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 8,\n  \"correctness\": 6,\n  \"completeness\": 9,\n  \"reasoning\": \"The response is well",
+      "input_tokens": 634,
+      "output_tokens": 41,
+      "latency_ms": 6305.988583015278,
+      "cost_usd": 0.00011969999999999998
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 8,
+        "correctness": 6,
+        "completeness": 9,
+        "overall": 7.5,
+        "reasoning": "The response is well"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-000",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen3-8b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "generic",
+      "quality_score": 7.5,
+      "cost_usd": 0.0,
+      "latency_ms": 93508.99400000344,
+      "total_tokens": 2112,
+      "cost_efficiency": 75000.0,
+      "latency_efficiency": 0.08020618850845218,
+      "routing_latency_ms": 0.0077500008046627045
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen2.5-coder:7b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen-coder (qwen2.5-coder:7b). Capabilities: code, code-review, debugging, analysis. Respond to the task thoroughly.",
+      "prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "response": "The provided Python function for computing the Fibonacci sequence is recursive and works correctly for small values of `n`. However, it has a significant issue when dealing with larger values of `n`. The reason for this is that the function performs an exponential number of recursive calls, leading to a time complexity of \\(O(2^n)\\). This is extremely inefficient for large `n`, and it can quickly result in a stack overflow error or take an impractical amount of time to compute.\n\nTo improve the efficiency of the Fibonacci function, we can use an iterative approach or memoization. Below is an improved version using memoization, which stores previously computed Fibonacci numbers to avoid redundant calculations.\n\n```python\ndef fibonacci(n, memo={}):\n    if n <= 1: return n\n    if n not in memo:\n        memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)\n    return memo[n]\n```\n\n### Explanation:\n1. **Memoization**: The function uses a dictionary `memo` to store the results of previously computed Fibonacci numbers. This prevents the function from recomputing the same values multiple times.\n2. **Base Case**: The function checks if `n` is less than or equal to 1 and returns `n` directly.\n3. **Recursive Case**: If `n` is not in the `memo` dictionary, the function computes the Fibonacci number recursively and stores the result in `memo`.\n\nThis version of the function has a time complexity of \\(O(n)\\) and a space complexity of \\(O(n)\\) due to the storage used by the `memo` dictionary.\n\n### Example Usage:\n```python\nprint(fibonacci(10))  # Output: 55\nprint(fibonacci(50))  # Output: 12586269025\n```\n\nThis approach ensures that the Fibonacci function is both efficient and scalable for larger values of `n`.",
+      "input_tokens": 88,
+      "output_tokens": 399,
+      "latency_ms": 11015.456458000699,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "task_difficulty": "medium",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen-coder",
+      "reason": "Ablation[a2a_ldp_prompt]: A2A skill-match routing, LDP prompt",
+      "routing_latency_ms": 0.004416011506691575
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nReview this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n## Response to Evaluate\nThe provided Python function for computing the Fibonacci sequence is recursive and works correctly for small values of `n`. However, it has a significant issue when dealing with larger values of `n`. The reason for this is that the function performs an exponential number of recursive calls, leading to a time complexity of \\(O(2^n)\\). This is extremely inefficient for large `n`, and it can quickly result in a stack overflow error or take an impractical amount of time to compute.\n\nTo improve the efficiency of the Fibonacci function, we can use an iterative approach or memoization. Below is an improved version using memoization, which stores previously computed Fibonacci numbers to avoid redundant calculations.\n\n```python\ndef fibonacci(n, memo={}):\n    if n <= 1: return n\n    if n not in memo:\n        memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)\n    return memo[n]\n```\n\n### Explanation:\n1. **Memoization**: The function uses a dictionary `memo` to store the results of previously computed Fibonacci numbers. This prevents the function from recomputing the same values multiple times.\n2. **Base Case**: The function checks if `n` is less than or equal to 1 and returns `n` directly.\n3. **Recursive Case**: If `n` is not in the `memo` dictionary, the function computes the Fibonacci number recursively and stores the result in `memo`.\n\nThis version of the function has a time complexity of \\(O(n)\\) and a space complexity of \\(O(n)\\) due to the storage used by the `memo` dictionary.\n\n### Example Usage:\n```python\nprint(fibonacci(10))  # Output: 55\nprint(fibonacci(50))  # Output: 12586269025\n```\n\nThis approach ensures that the Fibonacci function is both efficient and scalable for larger values of `n`.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 10,\n  \"correctness\": 9,\n  \"completeness\": 10,\n  \"reasoning\": \"",
+      "input_tokens": 597,
+      "output_tokens": 39,
+      "latency_ms": 7099.852916988311,
+      "cost_usd": 0.00011295
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 10,
+        "correctness": 9,
+        "completeness": 10,
+        "overall": 9.6,
+        "reasoning": ""
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-000",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen-coder",
+      "routing_strategy": "skill_match",
+      "prompt_strategy": "identity",
+      "quality_score": 9.6,
+      "cost_usd": 0.0,
+      "latency_ms": 11015.456458000699,
+      "total_tokens": 487,
+      "cost_efficiency": 95999.99999999999,
+      "latency_efficiency": 0.8715026959257207,
+      "routing_latency_ms": 0.004416011506691575
+    },
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen3-8b (qwen3:8b). Capabilities: reasoning, code, analysis, math. Respond to the task thoroughly.",
+      "prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "response": "",
+      "input_tokens": 87,
+      "output_tokens": 2048,
+      "latency_ms": 87835.13062502607,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Review this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "task_difficulty": "medium",
+      "task_domain": "code-review",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "LDP metadata routing: quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.011124997399747372
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nReview this Python function for bugs and suggest improvements:\ndef fibonacci(n):\n    if n <= 1: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n## Response to Evaluate\n\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 1,\n  \"correctness\": 1,\n  \"completeness\": 1,\n  \"reasoning\": \"The response provided is empty. Therefore, it has no content to evaluate for quality, correctness, or completeness beyond the minimum possible score.\"\n}\n```",
+      "input_tokens": 177,
+      "output_tokens": 68,
+      "latency_ms": 1865.4995420074556,
+      "cost_usd": 6.735e-05
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 1,
+        "correctness": 1,
+        "completeness": 1,
+        "overall": 1.0,
+        "reasoning": "The response provided is empty. Therefore, it has no content to evaluate for quality, correctness, or completeness beyond the minimum possible score."
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-000",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen3-8b",
+      "routing_strategy": "metadata",
+      "prompt_strategy": "identity",
+      "quality_score": 1.0,
+      "cost_usd": 0.0,
+      "latency_ms": 87835.13062502607,
+      "total_tokens": 2135,
+      "cost_efficiency": 10000.0,
+      "latency_efficiency": 0.011384966275840878,
+      "routing_latency_ms": 0.011124997399747372
+    }
+  ]
+}

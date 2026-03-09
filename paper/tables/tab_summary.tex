@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\centering
+\caption{Summary of LDP vs.\ A2A across all research questions. $\uparrow$ indicates higher is better, $\downarrow$ lower is better. Bold indicates the better result. $^*$Statistically significant ($p<0.05$). $^\dagger$Simulated (protocol design property). $^\ddagger$Not statistically significant.}
+\label{tab:summary}
+\begin{tabular}{llcccl}
+\toprule
+RQ & Metric & LDP & A2A & $\Delta$ & Evidence \\
+\midrule
+RQ1 & Overall quality$^\ddagger$ $\uparrow$ & 6.80 & \textbf{7.43} & $-0.63$ & Empirical \\
+ & Easy task latency $\downarrow$ & \textbf{2.9s} & 34.8s & $12\times$ & Empirical \\
+ & Hard task quality$^\ddagger$ $\uparrow$ & 3.3 & \textbf{4.1} & $-0.8$ & Empirical \\
+\midrule
+RQ2 & Token count$^*$ $\downarrow$ & \textbf{765} & 1128 & $-32\%$ & Empirical \\
+ & Latency $\downarrow$ & \textbf{14.0s} & 23.4s & $-40\%$ & Empirical \\
+ & Quality$^\ddagger$ $\uparrow$ & \textbf{5.70} & 5.47 & +0.23 & Empirical \\
+\midrule
+RQ3 & Decision quality$^\ddagger$ $\uparrow$ & 7.65 & \textbf{7.85} & $-0.20$ & Empirical \\
+ & Noisy provenance risk $\downarrow$ & N/A & N/A & $-1.0$ quality & Empirical \\
+\midrule
+RQ4 & Token overhead (10 rounds) $\downarrow$ & \textbf{0\%} & 39\% & $-39\text{pp}$ & Empirical \\
+ & Total tokens (10 rounds) $\downarrow$ & \textbf{12,990} & 16,010 & $-23\%$ & Empirical \\
+\midrule
+RQ5 & Attack detection$^\dagger$ $\uparrow$ & \textbf{96\%} & 6\% & $+90\text{pp}$ & Simulated \\
+\midrule
+RQ6 & Completion rate$^\dagger$ $\uparrow$ & \textbf{100\%} & 35\% & $+65\text{pp}$ & Simulated \\
+ & Quality degradation$^\dagger$ $\downarrow$ & \textbf{0.16} & 0.67 & $-0.51$ & Simulated \\
+\bottomrule
+\end{tabular}
+\end{table*}

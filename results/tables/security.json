@@ -1,0 +1,120 @@
+[
+  {
+    "experiment": "security",
+    "condition": "ldp_trust_domains",
+    "n_runs": 50,
+    "metrics": {
+      "detected": {
+        "name": "detected",
+        "mean": 0.96,
+        "median": 1.0,
+        "std": 0.1979,
+        "ci_95": [
+          0.9051,
+          1.0149
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 50
+      },
+      "false_positive": {
+        "name": "false_positive",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 50
+      },
+      "detection_rate": {
+        "name": "detection_rate",
+        "mean": 0.96,
+        "median": 1.0,
+        "std": 0.1979,
+        "ci_95": [
+          0.9051,
+          1.0149
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 50
+      },
+      "false_positive_rate": {
+        "name": "false_positive_rate",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 50
+      }
+    }
+  },
+  {
+    "experiment": "security",
+    "condition": "a2a_auth",
+    "n_runs": 50,
+    "metrics": {
+      "detected": {
+        "name": "detected",
+        "mean": 0.06,
+        "median": 0.0,
+        "std": 0.2399,
+        "ci_95": [
+          -0.0065,
+          0.1265
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 50
+      },
+      "false_positive": {
+        "name": "false_positive",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 50
+      },
+      "detection_rate": {
+        "name": "detection_rate",
+        "mean": 0.06,
+        "median": 0.0,
+        "std": 0.2399,
+        "ci_95": [
+          -0.0065,
+          0.1265
+        ],
+        "min": 0.0,
+        "max": 1.0,
+        "n": 50
+      },
+      "false_positive_rate": {
+        "name": "false_positive_rate",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 50
+      }
+    }
+  }
+]

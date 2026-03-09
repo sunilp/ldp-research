@@ -1,0 +1,296 @@
+[
+  {
+    "experiment": "provenance",
+    "condition": "with_provenance",
+    "n_runs": 15,
+    "metrics": {
+      "decision_quality": {
+        "name": "decision_quality",
+        "mean": 7.6533,
+        "median": 7.8,
+        "std": 1.2112,
+        "ci_95": [
+          7.0279,
+          8.2788
+        ],
+        "min": 6.1,
+        "max": 9.4,
+        "n": 15
+      },
+      "calibration_accuracy": {
+        "name": "calibration_accuracy",
+        "mean": 9.1333,
+        "median": 9.0,
+        "std": 0.8338,
+        "ci_95": [
+          8.7028,
+          9.5639
+        ],
+        "min": 7.0,
+        "max": 10.0,
+        "n": 15
+      },
+      "completeness": {
+        "name": "completeness",
+        "mean": 5.1333,
+        "median": 6.0,
+        "std": 2.7482,
+        "ci_95": [
+          3.7142,
+          6.5525
+        ],
+        "min": 1.0,
+        "max": 9.0,
+        "n": 15
+      },
+      "has_provenance": {
+        "name": "has_provenance",
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "n": 15
+      },
+      "noisy": {
+        "name": "noisy",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 15
+      },
+      "synthesis_tokens": {
+        "name": "synthesis_tokens",
+        "mean": 970.3333,
+        "median": 1077.0,
+        "std": 266.2839,
+        "ci_95": [
+          832.8249,
+          1107.8417
+        ],
+        "min": 532.0,
+        "max": 1330.0,
+        "n": 15
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0004,
+        "median": 0.0004,
+        "std": 0.0002,
+        "ci_95": [
+          0.0003,
+          0.0004
+        ],
+        "min": 0.0001,
+        "max": 0.0006,
+        "n": 15
+      }
+    }
+  },
+  {
+    "experiment": "provenance",
+    "condition": "without_provenance",
+    "n_runs": 15,
+    "metrics": {
+      "decision_quality": {
+        "name": "decision_quality",
+        "mean": 7.8533,
+        "median": 8.1,
+        "std": 1.8357,
+        "ci_95": [
+          6.9054,
+          8.8013
+        ],
+        "min": 4.4,
+        "max": 10.0,
+        "n": 15
+      },
+      "calibration_accuracy": {
+        "name": "calibration_accuracy",
+        "mean": 9.3333,
+        "median": 9.0,
+        "std": 0.7237,
+        "ci_95": [
+          8.9596,
+          9.7071
+        ],
+        "min": 8.0,
+        "max": 10.0,
+        "n": 15
+      },
+      "completeness": {
+        "name": "completeness",
+        "mean": 5.6667,
+        "median": 6.0,
+        "std": 3.4157,
+        "ci_95": [
+          3.9028,
+          7.4305
+        ],
+        "min": 1.0,
+        "max": 10.0,
+        "n": 15
+      },
+      "has_provenance": {
+        "name": "has_provenance",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 15
+      },
+      "noisy": {
+        "name": "noisy",
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "min": 0.0,
+        "max": 0.0,
+        "n": 15
+      },
+      "synthesis_tokens": {
+        "name": "synthesis_tokens",
+        "mean": 801.5333,
+        "median": 832.0,
+        "std": 229.0757,
+        "ci_95": [
+          683.2391,
+          919.8275
+        ],
+        "min": 457.0,
+        "max": 1217.0,
+        "n": 15
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0003,
+        "median": 0.0003,
+        "std": 0.0001,
+        "ci_95": [
+          0.0002,
+          0.0004
+        ],
+        "min": 0.0001,
+        "max": 0.0005,
+        "n": 15
+      }
+    }
+  },
+  {
+    "experiment": "provenance",
+    "condition": "noisy_provenance",
+    "n_runs": 15,
+    "metrics": {
+      "decision_quality": {
+        "name": "decision_quality",
+        "mean": 6.8467,
+        "median": 7.2,
+        "std": 2.6565,
+        "ci_95": [
+          5.4749,
+          8.2185
+        ],
+        "min": 1.0,
+        "max": 9.4,
+        "n": 15
+      },
+      "calibration_accuracy": {
+        "name": "calibration_accuracy",
+        "mean": 7.8667,
+        "median": 9.0,
+        "std": 2.8999,
+        "ci_95": [
+          6.3692,
+          9.3642
+        ],
+        "min": 1.0,
+        "max": 10.0,
+        "n": 15
+      },
+      "completeness": {
+        "name": "completeness",
+        "mean": 5.2667,
+        "median": 6.0,
+        "std": 3.0814,
+        "ci_95": [
+          3.6754,
+          6.8579
+        ],
+        "min": 1.0,
+        "max": 9.0,
+        "n": 15
+      },
+      "has_provenance": {
+        "name": "has_provenance",
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "n": 15
+      },
+      "noisy": {
+        "name": "noisy",
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ],
+        "min": 1.0,
+        "max": 1.0,
+        "n": 15
+      },
+      "synthesis_tokens": {
+        "name": "synthesis_tokens",
+        "mean": 1017.5333,
+        "median": 1065.0,
+        "std": 349.0933,
+        "ci_95": [
+          837.2623,
+          1197.8043
+        ],
+        "min": 547.0,
+        "max": 1657.0,
+        "n": 15
+      },
+      "cost_usd": {
+        "name": "cost_usd",
+        "mean": 0.0004,
+        "median": 0.0004,
+        "std": 0.0002,
+        "ci_95": [
+          0.0003,
+          0.0005
+        ],
+        "min": 0.0001,
+        "max": 0.0008,
+        "n": 15
+      }
+    }
+  }
+]

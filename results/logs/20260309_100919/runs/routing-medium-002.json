@@ -1,0 +1,81 @@
+{
+  "task_id": "routing-medium-002",
+  "events": [
+    {
+      "event": "llm_call",
+      "purpose": "delegate",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "system": "You are delegate delegate-qwen3-8b (qwen3:8b). Capabilities: reasoning, code, analysis, math. Respond to the task thoroughly.",
+      "prompt": "Explain the mathematical intuition behind attention mechanisms in transformers.",
+      "response": "The attention mechanism in transformers is a mathematical framework that enables models to dynamically weigh the importance of different parts of the input when generating outputs. Its core intuition lies in **weighted aggregation**, where the model computes relevance scores between input elements and uses these to focus on the most informative parts. Below is a breakdown of the mathematical intuition and components:\n\n---\n\n### **1. Core Mathematical Framework**\nThe attention mechanism computes a weighted sum of value vectors, where the weights are determined by the similarity between queries and keys. The formula is:\n\n$$\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n$$\n\nWhere:\n- **$ Q $, $ K $, $ V $** are matrices of queries, keys, and values, respectively.\n- **$ d_k $** is the dimension of the key vectors (scaling factor to prevent large values).\n- **$ \\text{softmax} $** normalizes the scores into a probability distribution.\n\n---\n\n### **2. Key Components and Their Roles**\n#### **a. Query (Q), Key (K), Value (V) Vectors**\n- **Queries** represent the current position (e.g., a word in the output sequence) and ask \"What should I focus on?\"\n- **Keys** encode the input elements (e.g., words in the input sequence) to determine relevance.\n- **Values** hold the actual information to be aggregated (e.g., embeddings of input words).\n\n#### **b. Dot Product and Similarity**\nThe dot product $ QK^T $ measures the similarity between queries and keys. Higher values indicate stronger alignment, meaning the model assigns more weight to the corresponding value. For example, if a query \"cat\" aligns strongly with a key \"cat\" in the input, the value \"cat\" is prioritized.\n\n#### **c. Scaling Factor ($ \\sqrt{d_k} $)**\nThe division by $ \\sqrt{d_k} $ prevents the dot product from becoming too large, which could cause numerical instability during training. This scaling ensures that the scores remain in a manageable range.\n\n#### **d. Softmax Normalization**\nThe softmax function converts raw scores into probabilities, ensuring they sum to 1. This guarantees that the attention weights form a valid probability distribution, allowing the model to focus on the most relevant parts of the input.\n\n---\n\n### **3. Intuition Behind the Mechanism**\n- **Dynamic Relevance**: The attention mechanism allows the model to adaptively focus on different parts of the input based on the current context. For example, in machine translation, when translating \"The cat sat on the mat,\" the model might prioritize \"cat\" when predicting \"sat\" and \"mat\" when predicting \"on.\"\n- **Global Dependencies**: Unlike recurrent networks (RNNs), which process input sequentially, attention mechanisms compute interactions between all pairs of input elements simultaneously. This enables the model to capture long-range dependencies efficiently.\n- **Weighted Aggregation**: The final output is a weighted sum of values, where weights are determined by the similarity between queries and keys. This allows the model to \"attend\" to the most relevant information for each output position.\n\n---\n\n### **4. Self-Attention and Multi-Head Attention**\n- **Self-Attention**: In transformers, the same input is used for $ Q $, $ K $, and $ V $, allowing the model to capture relationships between all words in the input (e.g., syntactic or semantic dependencies).\n- **Multi-Head Attention**: This extends self-attention by using multiple attention heads (i.e., multiple sets of $ Q $, $ K $, $ V $) to attend to different representation subspaces. This enhances the model's ability to capture diverse relationships (e.g., syntactic vs. semantic).\n\n---\n\n### **5. Mathematical Intuition in Action**\nConsider a simple example:\n- Input: [\"The\", \"cat\", \"sat\", \"on\", \"the\", \"mat\"]\n- For a query \"sat\", the attention mechanism computes scores between \"sat\" and each key (word in the input). The highest score might be for \"cat\" (since \"cat\" and \"sat\" are semantically related), leading to a higher weight on the value \"cat\" when generating the output.\n\nThis dynamic weighting is the essence of the attention mechanism, enabling transformers to handle complex tasks like translation, text generation, and more.\n\n---\n\n### **6. Generalization and Flexibility**\nThe attention mechanism is not limited to self-attention. It can be applied to:\n- **Cross-Attention**: When aligning two sequences (e.g., encoder-decoder in translation).\n- **Global Attention**: When the model must consider all elements of the input (e.g., in a document summarization task).\n- **Local Attention**: When focusing on a subset of the input (e.g., for efficiency in long sequences).\n\nThe mathematical formulation provides the flexibility to adapt to different tasks while maintaining computational efficiency via parallel processing.\n\n---\n\n### **Conclusion**\nThe attention mechanism is a mathematical innovation that transforms how models process sequential data. By computing similarity scores between queries and keys, normalizing them with softmax, and aggregating values, it enables models to dynamically focus on relevant information. This framework underpins the success of transformers in capturing complex dependencies and relationships in natural language and other domains.",
+      "input_tokens": 61,
+      "output_tokens": 1961,
+      "latency_ms": 49970.21337499609,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "routing",
+      "task_prompt": "Explain the mathematical intuition behind attention mechanisms in transformers.",
+      "task_difficulty": "medium",
+      "task_domain": "analysis",
+      "candidates": [
+        {
+          "id": "delegate-qwen3-8b",
+          "model": "qwen3:8b",
+          "quality": 0.85
+        },
+        {
+          "id": "delegate-qwen-coder",
+          "model": "qwen2.5-coder:7b",
+          "quality": 0.8
+        },
+        {
+          "id": "delegate-llama-3b",
+          "model": "llama3.2:3b",
+          "quality": 0.55
+        }
+      ],
+      "selected_delegate": "delegate-qwen3-8b",
+      "reason": "LDP metadata routing: quality=0.85, profile=deep-analytical",
+      "routing_latency_ms": 0.03766699228435755
+    },
+    {
+      "event": "llm_call",
+      "purpose": "judge_output",
+      "model": "gemini-2.5-flash",
+      "provider": "google",
+      "system": "You are an expert evaluator. Score the following task response on three dimensions:\n\n1. **Quality** (1-10): How well-written, clear, and useful is the response?\n2. **Correctness** (1-10): Is the response factually accurate and logically sound?\n3. **Completeness** (1-10): Does it fully address what was asked?\n\nRespond in JSON format:\n{\"quality\": N, \"correctness\": N, \"completeness\": N, \"reasoning\": \"brief explanation\"}",
+      "prompt": "## Task\nExplain the mathematical intuition behind attention mechanisms in transformers.\n\n## Response to Evaluate\nThe attention mechanism in transformers is a mathematical framework that enables models to dynamically weigh the importance of different parts of the input when generating outputs. Its core intuition lies in **weighted aggregation**, where the model computes relevance scores between input elements and uses these to focus on the most informative parts. Below is a breakdown of the mathematical intuition and components:\n\n---\n\n### **1. Core Mathematical Framework**\nThe attention mechanism computes a weighted sum of value vectors, where the weights are determined by the similarity between queries and keys. The formula is:\n\n$$\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n$$\n\nWhere:\n- **$ Q $, $ K $, $ V $** are matrices of queries, keys, and values, respectively.\n- **$ d_k $** is the dimension of the key vectors (scaling factor to prevent large values).\n- **$ \\text{softmax} $** normalizes the scores into a probability distribution.\n\n---\n\n### **2. Key Components and Their Roles**\n#### **a. Query (Q), Key (K), Value (V) Vectors**\n- **Queries** represent the current position (e.g., a word in the output sequence) and ask \"What should I focus on?\"\n- **Keys** encode the input elements (e.g., words in the input sequence) to determine relevance.\n- **Values** hold the actual information to be aggregated (e.g., embeddings of input words).\n\n#### **b. Dot Product and Similarity**\nThe dot product $ QK^T $ measures the similarity between queries and keys. Higher values indicate stronger alignment, meaning the model assigns more weight to the corresponding value. For example, if a query \"cat\" aligns strongly with a key \"cat\" in the input, the value \"cat\" is prioritized.\n\n#### **c. Scaling Factor ($ \\sqrt{d_k} $)**\nThe division by $ \\sqrt{d_k} $ prevents the dot product from becoming too large, which could cause numerical instability during training. This scaling ensures that the scores remain in a manageable range.\n\n#### **d. Softmax Normalization**\nThe softmax function converts raw scores into probabilities, ensuring they sum to 1. This guarantees that the attention weights form a valid probability distribution, allowing the model to focus on the most relevant parts of the input.\n\n---\n\n### **3. Intuition Behind the Mechanism**\n- **Dynamic Relevance**: The attention mechanism allows the model to adaptively focus on different parts of the input based on the current context. For example, in machine translation, when translating \"The cat sat on the mat,\" the model might prioritize \"cat\" when predicting \"sat\" and \"mat\" when predicting \"on.\"\n- **Global Dependencies**: Unlike recurrent networks (RNNs), which process input sequentially, attention mechanisms compute interactions between all pairs of input elements simultaneously. This enables the model to capture long-range dependencies efficiently.\n- **Weighted Aggregation**: The final output is a weighted sum of values, where weights are determined by the similarity between queries and keys. This allows the model to \"attend\" to the most relevant information for each output position.\n\n---\n\n### **4. Self-Attention and Multi-Head Attention**\n- **Self-Attention**: In transformers, the same input is used for $ Q $, $ K $, and $ V $, allowing the model to capture relationships between all words in the input (e.g., syntactic or semantic dependencies).\n- **Multi-Head Attention**: This extends self-attention by using multiple attention heads (i.e., multiple sets of $ Q $, $ K $, $ V $) to attend to different representation subspaces. This enhances the model's ability to capture diverse relationships (e.g., syntactic vs. semantic).\n\n---\n\n### **5. Mathematical Intuition in Action**\nConsider a simple example:\n- Input: [\"The\", \"cat\", \"sat\", \"on\", \"the\", \"mat\"]\n- For a query \"sat\", the attention mechanism computes scores between \"sat\" and each key (word in the input). The highest score might be for \"cat\" (since \"cat\" and \"sat\" are semantically related), leading to a higher weight on the value \"cat\" when generating the output.\n\nThis dynamic weighting is the essence of the attention mechanism, enabling transformers to handle complex tasks like translation, text generation, and more.\n\n---\n\n### **6. Generalization and Flexibility**\nThe attention mechanism is not limited to self-attention. It can be applied to:\n- **Cross-Attention**: When aligning two sequences (e.g., encoder-decoder in translation).\n- **Global Attention**: When the model must consider all elements of the input (e.g., in a document summarization task).\n- **Local Attention**: When focusing on a subset of the input (e.g., for efficiency in long sequences).\n\nThe mathematical formulation provides the flexibility to adapt to different tasks while maintaining computational efficiency via parallel processing.\n\n---\n\n### **Conclusion**\nThe attention mechanism is a mathematical innovation that transforms how models process sequential data. By computing similarity scores between queries and keys, normalizing them with softmax, and aggregating values, it enables models to dynamically focus on relevant information. This framework underpins the success of transformers in capturing complex dependencies and relationships in natural language and other domains.\n\n## Your Evaluation (JSON)",
+      "response": "```json\n{\n  \"quality\": 9,\n  \"correctness\":",
+      "input_tokens": 1280,
+      "output_tokens": 18,
+      "latency_ms": 3349.0943330107257,
+      "cost_usd": 0.0
+    },
+    {
+      "event": "judge",
+      "judge_type": "output",
+      "scores": {
+        "quality": 5,
+        "correctness": 5,
+        "completeness": 5,
+        "overall": 5.0,
+        "reasoning": "Parse error. Raw: ```json\n{\n  \"quality\": 9,\n  \"correctness\":"
+      }
+    },
+    {
+      "event": "task_result",
+      "task_id": "routing-medium-002",
+      "difficulty": "medium",
+      "delegate_selected": "delegate-qwen3-8b",
+      "quality_score": 5.0,
+      "cost_usd": 0.0,
+      "latency_ms": 49970.21337499609,
+      "total_tokens": 2022,
+      "cost_efficiency": 50000.0,
+      "latency_efficiency": 0.10005960876088396,
+      "routing_latency_ms": 0.03766699228435755
+    }
+  ]
+}
