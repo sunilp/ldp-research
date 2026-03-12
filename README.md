@@ -4,7 +4,7 @@ Experiment code, data, and paper source for:
 
 > **LDP: An Identity-Aware Protocol for Multi-Agent LLM Systems**
 > Sunil Prakash, Indian School of Business
-> arXiv: [TODO — add link when available]
+> arXiv: [2603.08852](https://arxiv.org/abs/2603.08852v1)
 
 ## Overview
 
