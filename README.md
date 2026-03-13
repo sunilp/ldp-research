@@ -89,6 +89,11 @@ python -m experiments.analysis.generate_latex
 
 All experiments were run on a single Apple Silicon machine (36GB RAM) using local Ollama inference. Total compute: ~8 hours for all experiments including ablation.
 
+### Related Writing
+
+- [Why Multi-Agent AI Systems Need Identity-Aware Routing](https://sunilprakash.com/writing/ldp-protocol/)
+- [From Debate to Deliberation: When Multi-Agent Reasoning Needs Structure](https://sunilprakash.com/writing/deliberative-collective-intelligence/)
+
 ## Related Repositories
 
 - **[ldp-protocol](https://github.com/sunilp/ldp-protocol)** — Protocol specification (RFC) and Rust reference implementation
