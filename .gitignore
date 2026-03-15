@@ -54,3 +54,5 @@ paper/github_readme_draft.md
 # Private drafts (local only)
 /drafts/
 /paper2/
+/results/tables/e3_*
+/results/tables/e4_*
