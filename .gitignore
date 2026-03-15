@@ -50,3 +50,6 @@ paper/arxiv-submission.zip
 
 # Draft files
 paper/github_readme_draft.md
+
+# Private drafts (local only)
+/drafts/
