@@ -6,6 +6,10 @@ Experiment code, data, and paper source for:
 > Sunil Prakash, Indian School of Business
 > arXiv: [2603.08852](https://arxiv.org/abs/2603.08852v1)
 
+> **The Provenance Paradox in Multi-Agent LLM Routing: Delegation Contracts and Attested Identity in LDP**
+> Sunil Prakash, Indian School of Business
+> arXiv: [2603.18043](https://arxiv.org/abs/2603.18043)
+
 ## Overview
 
 This repository contains everything needed to reproduce the empirical evaluation of the [LLM Delegate Protocol (LDP)](https://github.com/sunilp/ldp-protocol) against A2A and random baselines. The study evaluates six research questions spanning routing quality, payload efficiency, provenance impact, session overhead, security boundaries, and fallback reliability.
@@ -25,11 +29,14 @@ This repository contains everything needed to reproduce the empirical evaluation
 
 ```
 ldp-research/
-├── paper/                     # LaTeX source, figures, tables
+├── paper/                     # Paper 1: LaTeX source, figures, tables
 │   ├── main.tex               # Paper source
 │   ├── figures/               # 9 publication-quality PDF figures
 │   ├── tables/                # 7 LaTeX tables
 │   └── generate_figures.py    # Figure generation script
+├── paper2/                    # Paper 2: Provenance Paradox (arXiv:2603.18043)
+│   ├── main.tex               # Paper source
+│   └── figures/               # Publication figures
 ├── baselines/                 # Protocol baseline implementations
 │   ├── protocol.py            # ProtocolBaseline abstract interface
 │   ├── ldp_baseline.py        # LDP: metadata routing + identity prompts
